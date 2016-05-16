@@ -1,0 +1,25 @@
+<div>
+  <form action="/pets/:id/post/new" method="post">
+    <div>
+      <label>Title</label>
+      <input type="text" placeholder="Title" name="title" >
+    </div>
+    <div>
+      <label>Text</label>
+      <textarea type="text" placeholder="Enter the text for your post here." name="text"></textarea>
+    </div>
+    <div>
+      <label>URL of Picture</label>
+      <input type="text" placeholder="URL" name="postPicture">
+    </div>
+    <div>
+      <button type="submit">Update Post</button>
+    </div>
+  </form>
+    <div>
+      <button type="delete">Delete Post</button>
+    </div>
+  <div>
+    <a href="/users/<%= user._id %>/pets">Back</a>
+  </div>
+</div>

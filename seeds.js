@@ -30,16 +30,13 @@ Post.remove({})
   var heathcliff = new Pet({ name: 'Heathcliff', type: 'cat', breed: 'junkyard cat'})
   return heathcliff.save()
 })
-  // return Pet.create([fluffy, heathcliff]);
 .then(function(savedPet) {
     console.log("Saved", savedPet.name);
-    // if(err) return handleError(err);
     var firstPost = new Post({title: "I'm hungry", text: "I haven't eaten in 6 hours.", pet: savedPet._id});
     console.log("saving post...");
     return firstPost.save()
   })
 .then(function(savedFirstPost) {
-  // console.log(Pet.find({}));
   return Post.find({}).populate("pet");
   })
 .then(function(posts) {
@@ -50,34 +47,3 @@ Post.remove({})
   console.log("pets: ", pets);
   quit();
 });
-
-
-// .then(function(){
-//   quit();
-// });
-
-// .then(function(allTodos) {
-//   console.log('Printing all todos:');
-//   allTodos.forEach(function(todo) {
-//     console.log(todo);
-//   });
-//   return Todo.findOne({title: 'groceries'});
-// })
-// .then(function(groceries) {
-//   groceries.completed = true;
-//   return groceries.save();
-// })
-// .then(function(groceries) {
-//   console.log('updated groceries:', groceries);
-//   return groceries.remove();
-// })
-// .then(function(deleted) {
-//   return Todo.find({});
-// })
-// .then(function(allTodos) {
-//   console.log('Printing all todos:');
-//   allTodos.forEach(function(todo) {
-//     console.log(todo);
-//   });
-//   quit();
-// });
