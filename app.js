@@ -13,8 +13,7 @@ var session = require('express-session');
 var flash = require('connect-flash');
 
 var routes = require('./routes/index');
-var users = require('./routes/users');
-
+var petsRouter = require('./routes/pets');
 var app = express();
 
 // view engine setup
@@ -47,7 +46,7 @@ app.use(function (req, res, next) {
 });
 
 app.use('/', routes);
-app.use('/users', users);
+app.use('/pets', petsRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
