@@ -1,5 +1,5 @@
 <div>
-  <form action="/pets/:id/post/new" method="post">
+  <form action="/pets/<%= pets._id %>/post/<%= post._id %>/" method="post">
     <div>
       <label>Title</label>
       <input type="text" placeholder="Title" name="title" >
@@ -16,9 +16,9 @@
       <button type="submit">Update Post</button>
     </div>
   </form>
-    <div>
-      <button type="delete">Delete Post</button>
-    </div>
+  <form method="POST" action="/pets/<%= pets._id %>/post/<%= post._id %>/?_method=DELETE">
+    <button type="submit">Delete Post</button>
+  </form>
   <div>
     <a href="/users/<%= user._id %>/pets">Back</a>
   </div>
