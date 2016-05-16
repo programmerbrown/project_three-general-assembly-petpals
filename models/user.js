@@ -14,7 +14,6 @@ var User = new mongoose.Schema({
   gender: String,
   pets: [PetSchema]
   }, { timestamp: true });
-// todos : [Todo.schema]
 
 
 User.methods.encrypt = function(password) {
