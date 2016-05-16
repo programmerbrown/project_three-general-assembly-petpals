@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
-var Pet = require('./pet');
+var Pet = require('./pet')
 
 var User = new mongoose.Schema({
   local : {
@@ -8,13 +8,16 @@ var User = new mongoose.Schema({
     password : String
   },
 
+
   name:         {type: String, required: true},
   picture:      String,
   location:     String,
   age:          Number,
   gender:       String,
   pets: [PetSchema]
-}, {timestamp: true});
+  }, {timestamp: true});
+  // todos : [Todo.schema]
+
 
 
 
@@ -29,3 +32,4 @@ User.methods.isValidPassword = function(password) {
 };
 
 module.exports = mongoose.model('User', User);
+
