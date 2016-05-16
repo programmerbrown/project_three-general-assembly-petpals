@@ -1,7 +1,9 @@
 var mongoose = require('mongoose');
 var Post = require('./post');
+var Schema = mongoose.Schema;
+var ObjectId = Schema.ObjectId;
 
-var PetSchema = new mongoose.Schema({
+var PetSchema = new Schema({
   name:           {type: String, required: true},
   type:           {type: String, required: true},
   breed:          String,
@@ -9,7 +11,7 @@ var PetSchema = new mongoose.Schema({
   age:            Number,
   bio:            String,
   profilePicture: String,
-  post:           [{type: Schema.ObjectId, ref: "Post"}]
+  // posts:           [{type: Schema.ObjectId, ref: "Post"}]
 }, {timestamps: true});
 
 module.exports = mongoose.model('Pet', PetSchema);

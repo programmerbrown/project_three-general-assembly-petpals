@@ -12,7 +12,7 @@ var User = new mongoose.Schema({
   location:     String,
   age:          Number,
   gender:       String,
-  pets: [Pet.schema]
+  pets: [PetSchema]
 }, {timestamp: true});
 
 User.methods.encrypt = function(password) {
