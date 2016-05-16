@@ -7,7 +7,7 @@ var PostSchema = new Schema({
   title:          {type: String, required: true},
   text:           {type: String, required: true},
   postPicture:    String,
-  pet: {type: Schema.ObjectId, ref: "Pet"}
+  pet: {type: Schema.ObjectId, ref: 'Pet'}
 }, {timestamps: true});
 
 PostSchema.methods.print = function () {
