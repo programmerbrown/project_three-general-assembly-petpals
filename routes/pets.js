@@ -20,7 +20,7 @@ function authenticate(req, res, next) {
 }
 
 router.get('/', authenticate, function(req, res, next) {
-  var pets = global.currentuser.pets;
+  var pets = global.currentUser.pets;
   res.render('pets/index', { pets: pets, message: req.flash() });
 });
 
