@@ -1,13 +1,24 @@
 var mongoose = require('mongoose');
 var bcrypt   = require('bcrypt-nodejs');
-// var Todo = require('./todo');
+var Pet = require('./pet');
 
 var User = new mongoose.Schema({
   local : {
     email    : String,
     password : String
   },
+
+  name:         {type: String, required: true},
+  picture:      String,
+  location:     String,
+  age:          Number,
+  gender:       String,
+  pets: [PetSchema]
+}, {timestamp: true});
+
 });
+
+
 
 User.methods.encrypt = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
