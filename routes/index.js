@@ -3,7 +3,21 @@ var router = express.Router();
 var passport = require('passport');
 var session = require('express-session');
 
+function makeError(res, message, status) {
+  res.statusCode = status;
+  var error = new Error(message);
+  error.status = status;
+  return error;
+}
 
+function authenticate(req, res, next) {
+  if(!req.isAuthenticated()) {
+    res.redirect('/');
+  }
+  else {
+    next();
+  }
+}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

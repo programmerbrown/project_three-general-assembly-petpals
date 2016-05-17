@@ -39,11 +39,12 @@ router.get('/new', authenticate, function(req, res, next) {
 
 router.get('/:id', authenticate, function(req, res, next) {
   var pet = currentUser.pets.id(req.params.id);
-  if (!pet) return next(makeError(res, 'Document ot found', 404));
+  if (!pet) return next(makeError(res, 'Document not found', 404));
   res.render('pets/show', { pet: pet, message: req.flash() });
 });
 
 router.post('/', authenticate, function(req, res, next) {
+  console.log("made it to the pets create route");
   var pet = {
     name: req.body.name,
     type: req.body.type,
@@ -53,9 +54,10 @@ router.post('/', authenticate, function(req, res, next) {
     bio: req.body.bio,
     profilePicture: req.body.profilePicture
   };
+
   currentUser.pets.push(pet);
   currentUser.save()
-    .then(function() {
+    .then(function(saved) {
       res.redirect('/pets');
     }, function(err) {
       return next(err);
@@ -63,7 +65,7 @@ router.post('/', authenticate, function(req, res, next) {
 });
 
 router.get('/:id/edit', authenticate, function(req, res, next) {
-  var pet = currentuser.pets.id(request.params.id);
+  var pet = currentUser.pets.id(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
   res.render('pets/edit', { pet: pet, message: req.flash() });
 });
@@ -80,31 +82,25 @@ router.put('/:id', authenticate, function(req, res, next) {
     pet.bio = req.body.bio;
     pet.profilePicture = req.body.profilePicture;
     currentUser.save()
-    .then(function(saved) {
-      res.redirect('/pets');
-    }, function(err) {
-      return next(err)
-    });
-  }
+      .then(function(saved) {
+        res.redirect('/pets');
+      }, function(err) {
+        return next(err)
+      });
+   }
 });
 
-router.delete('/:id', authenticate, function(req,res,next) {
+router.delete('/:id', authenticate, function(req, res, next) {
   var pet = currentUser.pets.id(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
   var index = currentUser.todos.indexOf(pet);
   currentUser.pets.splice(index, 1);
   currentUser.save()
-  .then(function(saved){
-   res.redirect('/pets');
- }, function(err) {
-  return next(err);
-  });
+    .then(function(saved) {
+      res.redirect('/pets');
+    }, function(err) {
+      return next(err);
+    });
 });
-
-
-
-
-
-
 
 module.exports = router;
