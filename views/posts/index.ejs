@@ -1,5 +1,6 @@
 <% posts.forEach(function(post) { %>
 
+
 <dl>
 <dt><a href="/pets/<%= post.pet.id %>"> Name </a></dt>
      <dd><%= post.pet.name %></dd>
@@ -12,5 +13,6 @@
   <dt> Post </dt><dd><%= post.text %></dd>
   <dt> Pic</dt><dd><%= post.postPicture %></dd>
 </dl>
+
 
 <% }) %>

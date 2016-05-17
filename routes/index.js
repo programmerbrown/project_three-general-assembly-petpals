@@ -28,10 +28,11 @@ router.get('/', function(req, res, next) {
 });
 
 // INDEX (ALL POSTS)
+<<<<<<< HEAD
 router.get('/posts',  function(req, res, next) {
   Post.find({})
   .then(function(posts) {
-    res.render('posts/index', { posts: posts} );
+  res.render('posts/index', { posts: posts} );
   });
 });
 
