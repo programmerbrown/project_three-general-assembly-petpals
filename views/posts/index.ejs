@@ -1,0 +1,16 @@
+This is our posts INDEX page. It will list all of our posts.
+
+<% posts.forEach(function(post) { %>
+
+<dl>
+  <dt><a href="/pets/<%= pet.id %>"> Name </a></dt>
+     <dd>
+  <%= pet.name %>
+     </dd>
+  <dt> Title </dt><dd><%= post.title %></dd>
+  <dt> Post </dt><dd><%= post.text %></dd>
+  <dt> Pic</dt><dd><%= post.postPicture %></dd>
+
+</dl>
+
+<% }) %>

@@ -31,7 +31,7 @@ postsRouter.get('/new', authenticate, function(req, res, next) {
     text: '',
     postPicture: ''
 });
-  res.render('/pets/:id/posts/new', { post: post, id:req.params.id } );
+  res.render('posts/new', { post: post, id:req.params.id } );
 });
 
 // SHOW POST

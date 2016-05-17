@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var session = require('express-session');
+var Post = require('../models/post');
 
 function makeError(res, message, status) {
   res.statusCode = status;
@@ -27,10 +28,10 @@ router.get('/', function(req, res, next) {
 });
 
 // INDEX (ALL POSTS)
-router.get('/posts', authenticate, function(req, res, next) {
-  Posts.find({})
+router.get('/posts',  function(req, res, next) {
+  Post.find({})
   .then(function(posts) {
-    res.render('/posts/index', { posts: posts} );
+    res.render('posts/index', { posts: posts} );
   });
 });
 
