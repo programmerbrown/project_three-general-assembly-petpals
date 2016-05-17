@@ -65,16 +65,13 @@ router.post('/', authenticate, function(req, res, next) {
     .then(function(saved) {
       res.redirect('/pets');
     }, function(err) {
-        return next(err);
+      return next(err);
     });
 });
 
 // EDIT
 router.get('/:id/edit', authenticate, function(req, res, next) {
-
   var pet = currentUser.pets.id(req.params.id);
-
-
   if (!pet) return next(makeError(res, 'Document not found', 404));
   res.render('pets/edit', { pet: pet, message: req.flash() });
 });
@@ -97,12 +94,12 @@ router.put('/:id', authenticate, function(req, res, next) {
       }, function(err) {
         return next(err)
       });
-   }
+  }
 });
 
 
 // DESTROY
-router.delete('/:id', authenticate, function(req,res,next) {
+router.delete('/:id', authenticate, function(req, res, next) {
 
   var pet = currentUser.pets.id(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));

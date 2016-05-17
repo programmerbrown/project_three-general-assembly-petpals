@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Post = require("../models/post");
-var Pet = require('..models/pet')
+var petRouter = require('..models/pet')
 
 function makeError(res, message, status) {
   res.statusCode = status;
@@ -36,6 +36,7 @@ router.get('/pets/:id/posts/new', authenticate, function(req, res, next) {
   };
   res.render('/pets/:id/posts/new', { post: post} );
 });
+
 
 // // SHOW POST
 // router.get('pets/:id/post/:id', authenticate, function(req, res, next) {
