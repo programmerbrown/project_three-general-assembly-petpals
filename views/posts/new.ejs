@@ -1,19 +1,19 @@
 <div>
   <form action="/pets/<%= pet._id %>/post/new" method="post">
-    <div>
+    <div class="form-group">
       <label>Title</label>
-      <input type="text" placeholder="Title" name="title" >
+      <input class="form-control" type="text" placeholder="Title" name="title" >
     </div>
-    <div>
+    <div class="form-group">
       <label>Text</label>
-      <textarea type="text" placeholder="Enter the text for your post here." name="text"></textarea>
+      <textarea class="form-control" rows="4" cols="20" type="text" placeholder="Enter the text for your post here." name="text"></textarea>
     </div>
-    <div>
+    <div class="form-group">
       <label>URL of Picture</label>
-      <input type="text" placeholder="URL" name="postPicture">
+      <input class="form-control" type="text" placeholder="URL" name="postPicture">
     </div>
-    <div>
-      <button type="submit">Create a Post</button>
+    <div class="form-group">
+      <button class="form-control" type="submit">Create a Post</button>
     </div>
   </form>
   <div>
