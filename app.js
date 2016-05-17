@@ -14,6 +14,7 @@ var flash = require('connect-flash');
 
 var routes = require('./routes/index');
 var petsRouter = require('./routes/pets');
+// var postsRouter = require('./routes/posts');
 var app = express();
 
 // view engine setup
