@@ -3,11 +3,32 @@ var router = express.Router();
 var passport = require('passport');
 var session = require('express-session');
 
+function makeError(res, message, status) {
+  res.statusCode = status;
+  var error = new Error(message);
+  error.status = status;
+  return error;
+}
 
+function authenticate(req, res, next) {
+  if (!req.isAuthenticated()) {
+    res.redirect('/');
+  } else {
+    next();
+  }
+}
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'PetPals Home' });
+});
+
+// INDEX (ALL POSTS)
+router.get('/posts', authenticate, function(req, res, next) {
+  Posts.find({})
+  .then(function(posts) {
+    res.render('/posts/index', { posts: posts} );
+  });
 });
 
 // about page
@@ -44,6 +65,11 @@ router.post('/login', function(req, res, next) {
   });
   return loginProperty(req, res, next);
 });
+
+// EDIT USER
+router.get('/edit', function(req, res, next) {
+
+})
 
 // GET /logout
 router.get('/logout', function(req, res, next) {
