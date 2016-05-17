@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+
 var bcrypt = require('bcrypt-nodejs');
 var Pet = require('./pet');
 
@@ -16,6 +17,7 @@ var User = new mongoose.Schema({
 
   pets : [Pet.schema]
   }, { timestamp: true });
+
 
 
 User.methods.encrypt = function(password) {

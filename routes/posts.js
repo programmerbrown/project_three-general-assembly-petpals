@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var Post = require("../models/post");
-var petRouter = require('..models/pet')
+var Pet = require('..models/pet')
 
 function makeError(res, message, status) {
   res.statusCode = status;

@@ -1,0 +1,22 @@
+<div>
+  <form action="/pets/<%= pet._id %>/post/new" method="post">
+    <div class="form-group">
+      <label>Title</label>
+      <input class="form-control" type="text" placeholder="Title" name="title" >
+    </div>
+    <div class="form-group">
+      <label>Text</label>
+      <textarea class="form-control" rows="4" cols="20" type="text" placeholder="Enter the text for your post here." name="text"></textarea>
+    </div>
+    <div class="form-group">
+      <label>URL of Picture</label>
+      <input class="form-control" type="text" placeholder="URL" name="postPicture">
+    </div>
+    <div class="form-group">
+      <button class="form-control" type="submit">Create a Post</button>
+    </div>
+  </form>
+  <div>
+    <a href="/users/<%= user._id %>/pets">Back</a>
+  </div>
+</div>
