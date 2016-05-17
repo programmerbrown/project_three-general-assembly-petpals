@@ -47,7 +47,7 @@ petsRouter.get('/:id', authenticate, function(req, res, next) {
 
 
 // CREATE
-router.post('/', authenticate, function(req, res, next) {
+petsRouter.post('/', authenticate, function(req, res, next) {
   console.log("made it to the pets create route");
 
   var pet = {
@@ -97,11 +97,8 @@ petsRouter.put('/:id', authenticate, function(req, res, next) {
       });
   }
 });
-
-
-
 // DESTROY
-router.delete('/:id', authenticate, function(req, res, next) {
+petsRouter.delete('/:id', authenticate, function(req, res, next) {
 
   var pet = currentUser.pets.id(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
@@ -116,6 +113,6 @@ router.delete('/:id', authenticate, function(req, res, next) {
 });
 
 
-module.exports = router;
+module.exports = petsRouter;
 
 

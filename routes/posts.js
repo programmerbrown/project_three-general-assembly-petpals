@@ -30,20 +30,9 @@ postsRouter.get('/new', authenticate, function(req, res, next) {
     title: '',
     text: '',
     postPicture: ''
-
-  };
+});
   res.render('/pets/:id/posts/new', { post: post, id:req.params.id } );
 });
-
-
-// // SHOW POST
-// router.get('pets/:id/post/:id', authenticate, function(req, res, next) {
-//   Pet.findOne()
-//   var post =
-// })
-
-
-
 
 // SHOW POST
 postsRouter.get('/:id', authenticate, function(req, res, next) {
