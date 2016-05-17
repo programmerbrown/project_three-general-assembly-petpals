@@ -11,4 +11,10 @@ This is our pets INDEX page. It will list all of our pets.
 	<dt> Age </dt><dd><%= pet.age %></dd>
 	<dt> Bio </dt><dd><%= pet.bio %></dd>
 </dl>
+
+	<li><a href="/pets/<%= pet._id %>/edit"><button>Edit</button></a></li>
+
+	<li><form method="POST" action="/pets/<%= pet._id %>?_method=DELETE">
+  	<button type="submit">Delete</button>
+	</form></li>
 <% }) %>
