@@ -62,10 +62,17 @@ postsRouter.post('/', authenticate, function(req, res, next) {
 // EDIT POST
 postsRouter.get('/:id/edit', authenticate, function(req, res, next) {
   console.log("Made it to the EDIT route");
-  var post = pets.id.post.id(req.params.id);
-  if (!post) return next(makeError(res, 'Document not found', 404));
-  res.render('/posts/edit', {post: post, message: req.flash() });
-})
+  return Post.findOne({ _id: req.params.id })
+  .then(function(postReturned) {
+    console.log("Found a post and here it is.");
+    console.log(postReturned);
+    res.render('posts/edit', {post: postReturned, id: req.params.id, message: req.flash() });
+  });
+  // .then(function())
+  // // var post = pets.id.post.id(req.params.id);
+  // if (!post) return next(makeError(res, 'Document not found', 404));
+  // res.render('/posts/edit', {post: post, message: req.flash() });
+});
 
 // UPDATE POST
 postsRouter.put('/:id', authenticate, function(req, res, next) {
