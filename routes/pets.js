@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-
 var Pet = require("../models/pet");
 
 
@@ -69,7 +68,7 @@ router.post('/', authenticate, function(req, res, next) {
 
 // EDIT
 router.get('/:id/edit', authenticate, function(req, res, next) {
-  var pet = currentUser.pets.id(request.params.id);
+  var pet = currentUser.pets.id(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
   res.render('pets/edit', { pet: pet, message: req.flash() });
 });
@@ -99,7 +98,7 @@ router.put('/:id', authenticate, function(req, res, next) {
 router.delete('/:id', authenticate, function(req,res,next) {
   var pet = currentUser.pets.id(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
-  var index = currentUser.todos.indexOf(pet);
+  var index = currentUser.pets.indexOf(pet);
   currentUser.pets.splice(index, 1);
   currentUser.save()
   .then(function(saved){
