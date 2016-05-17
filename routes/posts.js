@@ -46,7 +46,8 @@ postsRouter.post('/', authenticate, function(req, res, next) {
   var post = new Post ({
     title: req.body.title,
     text: req.body.text,
-    postPicture: req.body.postPicture
+    postPicture: req.body.postPicture,
+    pet: req.params.id
   });
   console.log("We're saving this post");
   post.save()
@@ -60,6 +61,7 @@ postsRouter.post('/', authenticate, function(req, res, next) {
 
 // EDIT POST
 postsRouter.get('/:id/edit', authenticate, function(req, res, next) {
+  console.log("Made it to the EDIT route");
   var post = pets.id.post.id(req.params.id);
   if (!post) return next(makeError(res, 'Document not found', 404));
   res.render('/posts/edit', {post: post, message: req.flash() });
