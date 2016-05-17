@@ -76,19 +76,25 @@ postsRouter.get('/:id/edit', authenticate, function(req, res, next) {
 
 // UPDATE POST
 postsRouter.put('/:id', authenticate, function(req, res, next) {
-  var post = post;
-  if (!post) return next(makeError(res, 'Document not found', 404));
-  else {
-    post.title = req.body.title;
-    post.text = req.body.text;
-    postPicture = req.body.postPicture;
-    post.save()
-    .then(function(saved) {
-      res.redirect('/pets');
-    }, function(err) {
-      return next(err)
-    });
-  }
+  // var post = post;
+  return Post.findOne({ _id: req.params.id })
+  .then(function(post) {
+    if (!post) {
+      console.log("The UPDATE route is dying.");
+      return next(makeError(res, 'Document not found', 404));
+    } else {
+      console.log("The UPDATE route is alive and we are updating the post.");
+      post.title = req.body.title;
+      post.text = req.body.text;
+      post.postPicture = req.body.postPicture;
+      return post.save()
+    }
+  })
+  .then(function(saved) {
+        res.redirect('/pets');
+      }, function(err) {
+        return next(err)
+  });
 });
 
 // DESTROY POST
