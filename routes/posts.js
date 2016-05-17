@@ -34,7 +34,7 @@ router.get('/pets/:id/posts/new', authenticate, function(req, res, next) {
     text: '',
     postPicture: ''
   };
-  res.render('/pets/:id/posts/new', { post: post} );
+  res.render('/pets/:id/posts/new', { post: post, id:req.params.id } );
 });
 
 
