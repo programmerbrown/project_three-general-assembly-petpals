@@ -46,8 +46,7 @@ postsRouter.post('/', authenticate, function(req, res, next) {
   var post = new Post ({
     title: req.body.title,
     text: req.body.text,
-    postPicture: req.body.postPicture,
-    pet: req.params.id
+    postPicture: req.body.postPicture
   });
   console.log("We're saving this post");
   post.save()
