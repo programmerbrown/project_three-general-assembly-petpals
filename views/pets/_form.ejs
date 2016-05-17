@@ -1,39 +1,39 @@
-This is the form for creating and editing our pets.
 
 
-<form action="/pets" method="post">
+
 	<div>
 		<label for="name"> Name </label>
+<<<<<<< HEAD
 
 		<input type="text" id="name" name="name" />
 
+=======
+		<input type="text" id="name" name="name" value="<%= pet.name %>" />
+>>>>>>> 3b51e0a52682966ab40274ceee67bc8a3d284221
 	</div>
 	<div>
 		<label for="age"> Age </label>
-		<input type="number" id="age" name="age" />
+		<input type="number" id="age" name="age" value="<%= pet.age %>" />
 	</div>
 	<div>
 		<label for="type"> Type </label>
-		<input type="text" id="type" name="type"/>
+		<input type="text" id="type" name="type" value="<%= pet.type %>" />
 	</div>
 	<div>
 		<label for="breed"> Breed </label>
-		<input type="text" id="breed" name="breed"/>
+		<input type="text" id="breed" name="breed" value="<%= pet.breed %>" />
 	</div>
 	<div>
 		<label for="gender"> Gender </label>
-		<input type="text" id="gender" name="gender"/>
+		<input type="text" id="gender" name="gender" value="<%= pet.gender %>" />
 	</div>
 	<div>
 		<label for="bio"> Bio </label>
-		<input type="text" id="bio" name="bio"/>
+		<input type="text" id="bio" name="bio" value="<%= pet.bio %>" />
 	</div>
 	<div>
 		<label for="profilePicture"> Profile Picture </label>
-		<input type="text" id="profilePicture" name="profilePicture"/>
+		<input type="text" id="profilePicture" name="profilePicture" value="<%= pet.profilePicture %>" />
 	</div>
-	<div class="button">
-		<button type="submit"> Create my Pet </button>
-	</div>
-</form>
+	
 

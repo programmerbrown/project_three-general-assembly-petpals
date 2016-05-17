@@ -1,3 +1,10 @@
 This is our EDIT page. It will include the Pet form for updating.
 
+
+
+<form action="/pets/<%= pet._id %>?_method=PUT" method="post">
 <% include _form %>
+<div class="button">
+<button type="submit">Save my Changes</button>
+</div>
+</form>
