@@ -1,11 +1,6 @@
 var mongoose = require('mongoose');
-<<<<<<< HEAD
 var bcrypt = require('bcrypt-nodejs');
 var Pet = require('./pet');
-=======
-var bcrypt   = require('bcrypt-nodejs');
-var PetSchema = require('./pet');
->>>>>>> create-post-views
 
 var User = new mongoose.Schema({
   local: {

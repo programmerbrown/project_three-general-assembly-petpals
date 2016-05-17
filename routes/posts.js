@@ -23,16 +23,15 @@ function authenticate(req, res, next) {
   }
 };
 
-
 // NEW POST
 postsRouter.get('/new', authenticate, function(req, res, next) {
   console.log('make a new post');
-  var post = {
+  var post = new Post ({
     title: '',
     text: '',
     postPicture: ''
-  };
-  res.render('posts/new', { post: post } );
+  });
+  res.render('posts/new', { post: post, id: req.params.id } );
 });
 
 // SHOW POST
@@ -44,14 +43,16 @@ postsRouter.get('/:id', authenticate, function(req, res, next) {
 
 // CREATE POST
 postsRouter.post('/', authenticate, function(req, res, next) {
-  var post = {
+  var post = new Post ({
     title: req.body.title,
     text: req.body.text,
     postPicture: req.body.postPicture
-  };
+  });
+  console.log("We're saving this post");
   post.save()
   .then(function() {
-  res.redirect('/posts');
+  console.log("Saved, and we're redirecting")
+  res.redirect('/pets');
 }, function(err) {
     return next(err);
   });
