@@ -47,4 +47,7 @@ Post.remove({})
   console.log("pets: ", pets);
   quit();
 });
+<<<<<<< HEAD
 
+=======
+>>>>>>> b688b703443710d6debcd9e2f0f320b05b091a4d

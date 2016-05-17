@@ -24,7 +24,7 @@ function authenticate(req, res, next) {
 };
 
 // NEW POST
-postsRouter.get('/new', authenticate, function(req, res, next) {
+postsRouter.get('/new', function(req, res, next) {
   console.log('make a new post');
   var post = new Post ({
     title: '',
@@ -35,18 +35,19 @@ postsRouter.get('/new', authenticate, function(req, res, next) {
 });
 
 // SHOW POST
-postsRouter.get('/:id', authenticate, function(req, res, next) {
+postsRouter.get('/:id', function(req, res, next) {
   var post = pets.id.post(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
   res.render('posts/show', { post: post, message: req.flash() });
 });
 
 // CREATE POST
-postsRouter.post('/', authenticate, function(req, res, next) {
+postsRouter.post('/', function(req, res, next) {
   var post = new Post ({
     title: req.body.title,
     text: req.body.text,
-    postPicture: req.body.postPicture
+    postPicture: req.body.postPicture,
+    pet: req.params.id
   });
   console.log("We're saving this post");
   post.save()
@@ -59,14 +60,14 @@ postsRouter.post('/', authenticate, function(req, res, next) {
 });
 
 // EDIT POST
-postsRouter.get('/:id/edit', authenticate, function(req, res, next) {
+postsRouter.get('/:id/edit', function(req, res, next) {
   var post = pets.id.post.id(req.params.id);
   if (!post) return next(makeError(res, 'Document not found', 404));
   res.render('/posts/edit', {post: post, message: req.flash() });
 })
 
 // UPDATE POST
-postsRouter.put('/:id', authenticate, function(req, res, next) {
+postsRouter.put('/:id', function(req, res, next) {
   var post = post;
   if (!post) return next(makeError(res, 'Document not found', 404));
   else {
@@ -83,7 +84,7 @@ postsRouter.put('/:id', authenticate, function(req, res, next) {
 });
 
 // DESTROY POST
-postsRouter.delete('/:id', authenticate, function(req,res,next) {
+postsRouter.delete('/:id', function(req,res,next) {
   // grab post
   var post = pets.id(req.params.id);
   if (!post) return next(makeError(res, 'Document not found', 404));

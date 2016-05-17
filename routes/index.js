@@ -3,6 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var session = require('express-session');
 var User = require('../models/user')
+var Post = require('../models/post');
 
 function makeError(res, message, status) {
   res.statusCode = status;
@@ -25,10 +26,11 @@ router.get('/', function(req, res, next) {
 });
 
 // INDEX (ALL POSTS)
-router.get('/posts', authenticate, function(req, res, next) {
-  Posts.find({})
+router.get('/posts', function(req, res, next) {
+  return Post.find({}).populate('pet')
   .then(function(posts) {
-    res.render('/posts/index', { posts: posts} );
+    console.log(posts);
+    res.render('posts/index', { posts: posts} );
   });
 });
 
@@ -77,14 +79,14 @@ router.post('/login', function(req, res, next) {
 
 // EDIT USER
 router.get('/:id/edit', authenticate, function(req, res, next) {
-  var user = currentUser.id(req.params.id);
+  var user = User.findById(req.params.id);
   if (!user) return next(makeError(res, 'Document not found', 404));
   res.render('users/edit', { user: user, message: req.flash() });
 });
 
 // UPDATE USER
 router.put('/:id', authenticate, function(req, res, next) {
-  var user = currentUser.id(req.params.id);
+  var user = User.findById(req.params.id);
   if (!user) return next(makeError(res, 'Document not found', 404));
   else {
     user.name = req.body.name;
