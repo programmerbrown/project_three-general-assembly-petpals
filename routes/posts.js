@@ -1,8 +1,12 @@
 var express = require('express');
-var router = express.Router();
-
 var Post = require("../models/post");
-var Pet = require('..models/pet')
+var Pet = require('../models/pet')
+var petsRouter = require('./pets');
+
+var postsRouter = express.Router({mergeParams: true});
+
+petsRouter.use('/:id/posts', postsRouter);
+
 
 function makeError(res, message, status) {
   res.statusCode = status;
@@ -19,36 +23,78 @@ function authenticate(req, res, next) {
   }
 };
 
-// INDEX (ALL POSTS)
-router.get('/posts', authenticate, function(req, res, next) {
-  Posts.find({})
-  .then(function(posts) {
-    res.render('/posts/index', { posts: posts} );
-  });
-});
-
 // NEW POST
-router.get('/pets/:id/posts/new', authenticate, function(req, res, next) {
-  var post = {
+postsRouter.get('/new', authenticate, function(req, res, next) {
+  console.log('make a new post');
+  var post = new Post ({
     title: '',
     text: '',
     postPicture: ''
-  };
-  res.render('/pets/:id/posts/new', { post: post} );
+  });
+  res.render('posts/new', { post: post, id: req.params.id } );
 });
 
-// // SHOW POST
-// router.get('pets/:id/post/:id', authenticate, function(req, res, next) {
-//   Pet.findOne()
-//   var post =
-// })
+// SHOW POST
+postsRouter.get('/:id', authenticate, function(req, res, next) {
+  var post = pets.id.post(req.params.id);
+  if (!pet) return next(makeError(res, 'Document not found', 404));
+  res.render('posts/show', { post: post, message: req.flash() });
+});
+
+// CREATE POST
+postsRouter.post('/', authenticate, function(req, res, next) {
+  var post = new Post ({
+    title: req.body.title,
+    text: req.body.text,
+    postPicture: req.body.postPicture
+  });
+  console.log("We're saving this post");
+  post.save()
+  .then(function() {
+  console.log("Saved, and we're redirecting")
+  res.redirect('/pets');
+}, function(err) {
+    return next(err);
+  });
+});
+
+// EDIT POST
+postsRouter.get('/:id/edit', authenticate, function(req, res, next) {
+  var post = pets.id.post.id(req.params.id);
+  if (!post) return next(makeError(res, 'Document not found', 404));
+  res.render('/posts/edit', {post: post, message: req.flash() });
+})
+
+// UPDATE POST
+postsRouter.put('/:id', authenticate, function(req, res, next) {
+  var post = post;
+  if (!post) return next(makeError(res, 'Document not found', 404));
+  else {
+    post.title = req.body.title;
+    post.text = req.body.text;
+    postPicture = req.body.postPicture;
+    post.save()
+    .then(function(saved) {
+      res.redirect('/pets');
+    }, function(err) {
+      return next(err)
+    });
+  }
+});
+
+// DESTROY POST
+postsRouter.delete('/:id', authenticate, function(req,res,next) {
+  // grab post
+  var post = pets.id(req.params.id);
+  if (!post) return next(makeError(res, 'Document not found', 404));
+  pets.id.post.splice(index, 1);
+  post.save()
+  .then(function(saved){
+   res.redirect('/pets');
+ }, function(err) {
+  return next(err);
+  });
+});
 
 
-
-
-
-
-
-
-
-module.export = router;
+module.export = postsRouter;

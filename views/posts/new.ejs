@@ -1,5 +1,5 @@
 <div>
-  <form action="/pets/<%= pet._id %>/post/new" method="post">
+  <form action="/pets/<%= id %>/posts" method="post">
     <div class="form-group">
       <label>Title</label>
       <input class="form-control" type="text" placeholder="Title" name="title" >
@@ -16,7 +16,5 @@
       <button class="form-control" type="submit">Create a Post</button>
     </div>
   </form>
-  <div>
-    <a href="/users/<%= user._id %>/pets">Back</a>
-  </div>
+  <div> </div>
 </div>
