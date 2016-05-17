@@ -47,8 +47,3 @@ Post.remove({})
   console.log("pets: ", pets);
   quit();
 });
-<<<<<<< HEAD
-
-
-=======
->>>>>>> create-post-views

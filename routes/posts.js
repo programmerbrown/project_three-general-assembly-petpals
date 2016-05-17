@@ -47,13 +47,14 @@ postsRouter.post('/', authenticate, function(req, res, next) {
   var post = new Post ({
     title: req.body.title,
     text: req.body.text,
-    postPicture: req.body.postPicture
+    postPicture: req.body.postPicture,
+    pet: req.params.id
   });
   console.log("We're saving this post");
   post.save()
   .then(function() {
   console.log("Saved, and we're redirecting")
-  res.redirect('/pets');
+  res.redirect('/posts');
 }, function(err) {
     return next(err);
   });
