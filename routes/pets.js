@@ -19,13 +19,13 @@ function authenticate(req, res, next) {
 }
 
 // INDEX CURRENT USER PETS
-petsRouter.get('/', authenticate, function(req, res, next) {
+petsRouter.get('/', function(req, res, next) {
   var pets = global.currentUser.pets;
   res.render('pets/index', { pets: pets, message: req.flash() });
 });
 
 // NEW PET
-petsRouter.get('/new', authenticate, function(req, res, next) {
+petsRouter.get('/new', function(req, res, next) {
   var pet = {
     name: '',
     type: '',
@@ -39,14 +39,14 @@ petsRouter.get('/new', authenticate, function(req, res, next) {
 });
 
 // SHOW PET
-petsRouter.get('/:id', authenticate, function(req, res, next) {
-  var pet = currentUser.pets.id(req.params.id);
-  if (!pet) return next(makeError(res, 'Document ot found', 404));
+petsRouter.get('/:id', function(req, res, next) {
+  var pet = Pet.findById(req.params.id);
+  if (!pet) return next(makeError(res, 'Document not found', 404));
   res.render('pets/show', { pet: pet, message: req.flash() });
 });
 
 // CREATE PET
-petsRouter.post('/', authenticate, function(req, res, next) {
+petsRouter.post('/', function(req, res, next) {
   var pet = {
     name: req.body.name,
     type: req.body.type,
@@ -67,14 +67,14 @@ petsRouter.post('/', authenticate, function(req, res, next) {
 });
 
 // EDIT PET
-petsRouter.get('/:id/edit', authenticate, function(req, res, next) {
+petsRouter.get('/:id/edit', function(req, res, next) {
   var pet = currentUser.pets.id(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
   res.render('pets/edit', { pet: pet, message: req.flash() });
 });
 
 // UPDATE PET
-petsRouter.put('/:id', authenticate, function(req, res, next) {
+petsRouter.put('/:id', function(req, res, next) {
   var pet = currentUser.pets.id(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
   else {
@@ -95,7 +95,7 @@ petsRouter.put('/:id', authenticate, function(req, res, next) {
 });
 
 // DESTROY PET
-petsRouter.delete('/:id', authenticate, function(req,res,next) {
+petsRouter.delete('/:id', function(req,res,next) {
   var pet = currentUser.pets.id(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
   var index = currentUser.pets.indexOf(pet);
