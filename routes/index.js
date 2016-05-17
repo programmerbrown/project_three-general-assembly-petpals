@@ -79,14 +79,14 @@ router.post('/login', function(req, res, next) {
 
 // EDIT USER
 router.get('/:id/edit', authenticate, function(req, res, next) {
-  var user = User.findById(req.params.id);
+  var user = currentUser;
   if (!user) return next(makeError(res, 'Document not found', 404));
   res.render('users/edit', { user: user, message: req.flash() });
 });
 
 // UPDATE USER
 router.put('/:id', authenticate, function(req, res, next) {
-  var user = User.findById(req.params.id);
+  var user = currentUser;
   if (!user) return next(makeError(res, 'Document not found', 404));
   else {
     user.name = req.body.name;

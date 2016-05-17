@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt-nodejs');
 var Pet = require('./pet');
+var Post = require('./post');
 
 
 var User = new mongoose.Schema({
