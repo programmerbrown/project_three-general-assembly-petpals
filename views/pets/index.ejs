@@ -1,4 +1,14 @@
 This is our pets INDEX page. It will list all of our pets.
 
 
-(Some forEach loop here)
+<% pets.forEach(function(pet) { %>
+
+<dl>
+	<dt><a href="/pets/<%= pet.id %>"> Name </a></dt><dd><%= pet.name %></dd>
+	<dt> Gender </dt><dd><%= pet.gender %></dd>
+	<dt> Type </dt><dd><%= pet.type %></dd>
+	<dt> Breed </dt><dd><%= pet.breed %></dd>
+	<dt> Age </dt><dd><%= pet.age %></dd>
+	<dt> Bio </dt><dd><%= pet.bio %></dd>
+</dl>
+<% }) %>
