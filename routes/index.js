@@ -26,8 +26,9 @@ router.get('/', function(req, res, next) {
 
 // INDEX (ALL POSTS)
 router.get('/posts', function(req, res, next) {
-  Post.find({})
+  return Post.find({}).populate('pet')
   .then(function(posts) {
+    console.log(posts);
     res.render('posts/index', { posts: posts} );
   });
 });
