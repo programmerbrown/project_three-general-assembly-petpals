@@ -32,15 +32,14 @@ postsRouter.get('/new', authenticate, function(req, res, next) {
     text: '',
     postPicture: ''
   };
-  res.render('posts/new', { post: post} );
+  res.render('posts/new', { post: post } );
 });
 
 // SHOW POST
 postsRouter.get('/:id', authenticate, function(req, res, next) {
   var post = pets.id.post(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
-  res.render("show post");
-  // res.render('posts/show', { post: post, message: req.flash() });
+  res.render('posts/show', { post: post, message: req.flash() });
 });
 
 // CREATE POST
@@ -65,6 +64,7 @@ postsRouter.get('/:id/edit', authenticate, function(req, res, next) {
   res.render('/posts/edit', {post: post, message: req.flash() });
 })
 
+// UPDATE POST
 postsRouter.put('/:id', authenticate, function(req, res, next) {
   var post = post;
   if (!post) return next(makeError(res, 'Document not found', 404));
@@ -81,6 +81,7 @@ postsRouter.put('/:id', authenticate, function(req, res, next) {
   }
 });
 
+// DESTROY POST
 postsRouter.delete('/:id', authenticate, function(req,res,next) {
   // grab post
   var post = pets.id(req.params.id);
@@ -93,13 +94,6 @@ postsRouter.delete('/:id', authenticate, function(req,res,next) {
   return next(err);
   });
 });
-
-
-
-
-
-
-
 
 
 module.export = postsRouter;
