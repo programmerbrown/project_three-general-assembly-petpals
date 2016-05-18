@@ -79,22 +79,23 @@ router.post('/login', function(req, res, next) {
 
 // EDIT USER
 router.get('/:id/edit', authenticate, function(req, res, next) {
-  var user = currentUser;
+  var user = currentUser
   if (!user) return next(makeError(res, 'Document not found', 404));
   res.render('users/edit', { user: user, message: req.flash() });
 });
 
 // UPDATE USER
 router.put('/:id', authenticate, function(req, res, next) {
-  var user = currentUser;
-  if (!user) return next(makeError(res, 'Document not found', 404));
+  var user = currentUser
+  if (!currentUser) return next(makeError(res, 'Document not found', 404));
   else {
     user.name = req.body.name;
     user.age = req.body.age;
     user.location = req.body.location;
     user.gender = req.body.gender;
     user.picture = req.body.picture;
-    currentUser.save()
+    user.local.email = req.body.email;
+    user.save()
     .then(function(saved) {
       res.redirect('/');
     }, function(err) {
