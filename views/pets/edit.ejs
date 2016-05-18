@@ -6,5 +6,10 @@ This is our EDIT page. It will include the Pet form for updating.
 <% include _form %>
 <div class="button">
 <button type="submit">Save my Changes</button>
+
 </div>
+
 </form>
+<form method="POST" action="/pets/<%= pet._id %>/?_method=DELETE">
+    <button type="submit">Delete</button>
+  </form>

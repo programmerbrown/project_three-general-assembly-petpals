@@ -60,40 +60,49 @@ postsRouter.post('/', function(req, res, next) {
 });
 
 // EDIT POST
-postsRouter.get('/:id/edit', function(req, res, next) {
-  var post = pets.id.post.id(req.params.id);
-  if (!post) return next(makeError(res, 'Document not found', 404));
-  res.render('/posts/edit', {post: post, message: req.flash() });
-})
+postsRouter.get('/:id/edit', authenticate, function(req, res, next) {
+  console.log("Made it to the EDIT route");
+  return Post.findOne({ _id: req.params.id })
+  .then(function(postReturned) {
+    console.log("Found a post and here it is.");
+    console.log(postReturned);
+    res.render('posts/edit', {post: postReturned, id: req.params.id, message: req.flash() });
+  });
+  // .then(function())
+  // // var post = pets.id.post.id(req.params.id);
+  // if (!post) return next(makeError(res, 'Document not found', 404));
+  // res.render('/posts/edit', {post: post, message: req.flash() });
+});
 
 // UPDATE POST
-postsRouter.put('/:id', function(req, res, next) {
-  var post = post;
-  if (!post) return next(makeError(res, 'Document not found', 404));
-  else {
-    post.title = req.body.title;
-    post.text = req.body.text;
-    postPicture = req.body.postPicture;
-    post.save()
-    .then(function(saved) {
-      res.redirect('/pets');
-    }, function(err) {
-      return next(err)
-    });
-  }
+postsRouter.put('/:id', authenticate, function(req, res, next) {
+  // var post = post;
+  return Post.findOne({ _id: req.params.id })
+  .then(function(post) {
+    if (!post) {
+      console.log("The UPDATE route is dying.");
+      return next(makeError(res, 'Document not found', 404));
+    } else {
+      console.log("The UPDATE route is alive and we are updating the post.");
+      post.title = req.body.title;
+      post.text = req.body.text;
+      post.postPicture = req.body.postPicture;
+      return post.save()
+    }
+  })
+  .then(function(saved) {
+        res.redirect('/pets');
+      }, function(err) {
+        return next(err)
+  });
 });
 
 // DESTROY POST
-postsRouter.delete('/:id', function(req,res,next) {
-  // grab post
-  var post = pets.id(req.params.id);
-  if (!post) return next(makeError(res, 'Document not found', 404));
-  pets.id.post.splice(index, 1);
-  post.save()
-  .then(function(saved){
-   res.redirect('/pets');
- }, function(err) {
-  return next(err);
+postsRouter.delete('/:id', authenticate, function(req,res,next) {
+
+  Post.remove({ _id: req.params.id })
+  .then(function() {
+    res.redirect('/pets');
   });
 });
 
