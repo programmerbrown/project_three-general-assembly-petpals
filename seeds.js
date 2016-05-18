@@ -25,26 +25,41 @@ Post.remove({})
   return Pet.remove({});
 })
 .then(function() {
-  console.log('old pets removed');
-  console.log('creating some new pets...');
-  var heathcliff = new Pet({ name: 'Heathcliff', type: 'cat', breed: 'junkyard cat'})
-  return heathcliff.save()
+  console.log('removing old users...');
+  return User.remove({});
 })
-.then(function(savedPet) {
-    console.log("Saved", savedPet.name);
-    var firstPost = new Post({title: "I'm hungry", text: "I haven't eaten in 6 hours.", pet: savedPet._id});
-    console.log("saving post...");
-    return firstPost.save()
-  })
-.then(function(savedFirstPost) {
-  return Post.find({}).populate("pet");
-  })
-.then(function(posts) {
-  console.log("posts: ", posts);
-  return Pet.find({});
-})
-.then(function(pets){
-  console.log("pets: ", pets);
+.then(function() {
+  console.log("Now quitting...");
   quit();
 });
+
+// console.log('removing old posts...');
+// Post.remove({})
+// .then(function(){
+//   console.log('removing old pets...');
+//   return Pet.remove({});
+// })
+// .then(function() {
+//   console.log('old pets removed');
+//   console.log('creating some new pets...');
+//   var heathcliff = new Pet({ name: 'Heathcliff', type: 'cat', breed: 'junkyard cat'})
+//   return heathcliff.save()
+// })
+// .then(function(savedPet) {
+//     console.log("Saved", savedPet.name);
+//     var firstPost = new Post({title: "I'm hungry", text: "I haven't eaten in 6 hours.", pet: savedPet._id});
+//     console.log("saving post...");
+//     return firstPost.save()
+//   })
+// .then(function(savedFirstPost) {
+//   return Post.find({}).populate("pet");
+//   })
+// .then(function(posts) {
+//   console.log("posts: ", posts);
+//   return Pet.find({});
+// })
+// .then(function(pets){
+//   console.log("pets: ", pets);
+//   quit();
+// });
 
