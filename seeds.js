@@ -27,12 +27,16 @@ Post.remove({})
 .then(function() {
   console.log('old pets removed');
   console.log('creating some new pets...');
-  var heathcliff = new Pet({ name: 'Heathcliff', type: 'cat', breed: 'junkyard cat'})
+  var heathcliff = new Pet({ name: 'Heathcliff',
+                           type: 'cat',
+                           breed: 'junkyard cat'})
   return heathcliff.save()
 })
 .then(function(savedPet) {
     console.log("Saved", savedPet.name);
-    var firstPost = new Post({title: "I'm hungry", text: "I haven't eaten in 6 hours.", pet: savedPet._id});
+    var firstPost = new Post({title: "I'm hungry",
+                             text: "I haven't eaten in 6 hours.",
+                             pet: savedPet._id});
     console.log("saving post...");
     return firstPost.save()
   })
@@ -47,8 +51,3 @@ Post.remove({})
   console.log("pets: ", pets);
   quit();
 });
-<<<<<<< HEAD
-
-
-=======
->>>>>>> create-post-views
