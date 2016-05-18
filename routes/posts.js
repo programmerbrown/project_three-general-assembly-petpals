@@ -2,6 +2,7 @@ var express = require('express');
 var Post = require("../models/post");
 var Pet = require('../models/pet')
 var petsRouter = require('./pets');
+var mongoose = require('mongoose');
 
 var postsRouter = express.Router({mergeParams: true});
 
@@ -49,12 +50,11 @@ postsRouter.post('/', function(req, res, next) {
     postPicture: req.body.postPicture,
     pet: req.params.id
   });
-  console.log("We're saving this post");
+  console.log("saving post")
   post.save()
-  .then(function() {
-  console.log("Saved, and we're redirecting")
-  res.redirect('/pets');
-}, function(err) {
+  .then(function(){
+    res.redirect('/posts');
+  }, function(err) {
     return next(err);
   });
 });
