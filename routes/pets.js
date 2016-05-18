@@ -47,7 +47,7 @@ petsRouter.get('/:id', function(req, res, next) {
 
 // CREATE PET
 petsRouter.post('/', function(req, res, next) {
-  var pet = {
+  var pet = new Pet ({
     name: req.body.name,
     type: req.body.type,
     breed: req.body.breed,
@@ -55,9 +55,13 @@ petsRouter.post('/', function(req, res, next) {
     age: req.body.age,
     bio: req.body.bio,
     profilePicture: req.body.profilePicture
-  };
+  });
+  console.log('saving pet');
+  pet.save();
+  console.log(pet);
   console.log("pushing pet to current user")
-  currentUser.pets.push(pet)
+  currentUser.pets.push(pet);
+  console.log('saving pet to user');
   currentUser.save()
   .then(function() {
     res.redirect('/pets');

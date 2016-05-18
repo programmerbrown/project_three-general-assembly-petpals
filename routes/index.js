@@ -30,7 +30,7 @@ router.get('/posts', function(req, res, next) {
   return Post.find({}).populate('pet')
   .then(function(posts) {
     console.log(posts);
-    res.render('posts/index', { posts: posts} );
+    res.render('posts/index', { posts: posts } );
   });
 });
 
