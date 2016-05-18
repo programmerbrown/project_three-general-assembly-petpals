@@ -18,6 +18,21 @@ function handleError(err) {
   return err;
 }
 
+// console.log('removing old posts...');
+// Post.remove({})
+// .then(function(){
+//   console.log('removing old pets...');
+//   return Pet.remove({});
+// })
+// .then(function() {
+//   console.log('removing old users...');
+//   return User.remove({});
+// })
+// .then(function() {
+//   console.log("Now quitting...");
+//   quit();
+// });
+
 console.log('removing old posts...');
 Post.remove({})
 .then(function(){
