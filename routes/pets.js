@@ -41,13 +41,14 @@ petsRouter.get('/new', function(req, res, next) {
 // SHOW PET
 petsRouter.get('/:id', function(req, res, next) {
   var pet = currentUser.pets.id(req.params.id);
+  var post = pet.id.post(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
   res.render('pets/show', { pet: pet, message: req.flash() });
 });
 
 // CREATE PET
 petsRouter.post('/', function(req, res, next) {
-  var pet = {
+  var pet = new Pet ({
     name: req.body.name,
     type: req.body.type,
     breed: req.body.breed,
@@ -55,7 +56,8 @@ petsRouter.post('/', function(req, res, next) {
     age: req.body.age,
     bio: req.body.bio,
     profilePicture: req.body.profilePicture
-  };
+  });
+  pet.save()
   console.log("pushing pet to current user")
   currentUser.pets.push(pet)
   currentUser.save()
