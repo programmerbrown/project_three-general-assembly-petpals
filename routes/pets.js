@@ -1,6 +1,9 @@
 var express = require('express');
 var petsRouter = express.Router();
 var Pet = require("../models/pet");
+var Post = require('../models/post');
+
+
 
 
 function makeError(res, message, status) {
@@ -40,10 +43,13 @@ petsRouter.get('/new', function(req, res, next) {
 
 // SHOW PET
 petsRouter.get('/:id', function(req, res, next) {
-  var pet = currentUser.pets.id(req.params.id);
-  var post = pet.id.post(req.params.id);
+  var pet = currentUser.pets.id(req.params.id)
   if (!pet) return next(makeError(res, 'Document not found', 404));
-  res.render('pets/show', { pet: pet, message: req.flash() });
+  return Post.find({}).populate('pet')
+  .then(function(posts) {
+    console.log(pet.posts);
+  res.render('pets/show', { pet: pet,  message: req.flash() });
+ })
 });
 
 // CREATE PET
