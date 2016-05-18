@@ -68,10 +68,6 @@ postsRouter.get('/:id/edit', authenticate, function(req, res, next) {
     console.log(postReturned);
     res.render('posts/edit', {post: postReturned, id: req.params.id, message: req.flash() });
   });
-  // .then(function())
-  // // var post = pets.id.post.id(req.params.id);
-  // if (!post) return next(makeError(res, 'Document not found', 404));
-  // res.render('/posts/edit', {post: post, message: req.flash() });
 });
 
 // UPDATE POST

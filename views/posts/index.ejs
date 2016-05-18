@@ -1,3 +1,4 @@
+
 This is the posts index page
 <% posts.forEach(function(post) { %>
 
@@ -15,4 +16,22 @@ This is the posts index page
     <dt> Pic </dt> <dd><%= post.postPicture %> </dd>
   </dl>
 
+    Comments:
+    <ul id="comments">
+    </ul>
+
+
+  <form id="new-comment" action="/posts" method="post">
+    <input type="text" name="commentText" id="comment-text" placeholder="Make a comment!" value="">
+    <select name="pet" id="comment-pet">
+      <% currentUser.pets.forEach(function(pet) { %>
+        <option value="<%= pet.name %>"> <%= pet.name %> </option>
+      <% }); %>
+    </select>
+    <input type="submit" value="Comment">
+  </form>
+
+
+
 <% }) %>
+
