@@ -12,7 +12,7 @@ var PetSchema = new Schema({
   age:            Number,
   bio:            String,
   profilePicture: String,
-   posts:           [{type: Schema.ObjectId, ref: "Post"}]
+
 }, {timestamps: true}
 );
 

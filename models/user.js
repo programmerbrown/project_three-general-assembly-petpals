@@ -14,7 +14,6 @@ var User = new mongoose.Schema({
   location: String,
   age: Number,
   gender: String,
-
   pets : [Pet.schema]
   }, { timestamp: true });
 
