@@ -14,8 +14,11 @@ var User = new mongoose.Schema({
   location: String,
   age: Number,
   gender: String,
-  pets: [Pet.schema]
+
+  pets : [Pet.schema]
   }, { timestamp: true });
+
+
 
 User.methods.encrypt = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8));

@@ -1,7 +1,8 @@
+This is the posts index page
 <% posts.forEach(function(post) { %>
 
   <dl>
-    <dt>Name<a href="/pets/<%=post.pet.id %>">
+    <dt>Name<a href="/pets/<%= post.pet.id %>">
     <dd><%= post.pet.name %></dd>
     </a>
     </dt>
