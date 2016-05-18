@@ -1,1 +1,1 @@
-web: ./run.bash
+web: node app.js
