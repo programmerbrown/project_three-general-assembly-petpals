@@ -99,7 +99,6 @@ postsRouter.put('/:id', authenticate, function(req, res, next) {
 
 // DESTROY POST
 postsRouter.delete('/:id', authenticate, function(req,res,next) {
-
   Post.remove({ _id: req.params.id })
   .then(function() {
     res.redirect('/pets');

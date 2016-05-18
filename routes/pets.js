@@ -1,10 +1,14 @@
 var express = require('express');
 var petsRouter = express.Router();
 var Pet = require("../models/pet");
+<<<<<<< HEAD
 var Post = require('../models/post');
 
 
 
+=======
+var Post = require("../models/post");
+>>>>>>> 2fc7ba247dddfbca15c2bc1d76cd6712c13f3076
 
 function makeError(res, message, status) {
   res.statusCode = status;
@@ -109,8 +113,19 @@ petsRouter.delete('/:id', function(req,res,next) {
   if (!pet) return next(makeError(res, 'Document not found', 404));
   var index = currentUser.pets.indexOf(pet);
   currentUser.pets.splice(index, 1);
+  // console.log(pet);
   currentUser.save()
-  .then(function(saved){
+  .then(function(saved) {
+    console.log("Hello World!");
+    console.log(req.params.id);
+    // return Post.find({ pet: req.params.id });
+    return Post.remove({ pet: req.params.id });
+  })
+  .then(function() {
+    return Pet.findByIdAndRemove(req.params.id);
+  })
+  .then(function(){
+    // console.log(post);
    res.redirect('/pets');
  }, function(err) {
   return next(err);
