@@ -40,7 +40,7 @@ petsRouter.get('/new', function(req, res, next) {
 
 // SHOW PET
 petsRouter.get('/:id', function(req, res, next) {
-  var pet = Pet.findById(req.params.id);
+  var pet = currentUser.pets.id(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
   res.render('pets/show', { pet: pet, message: req.flash() });
 });

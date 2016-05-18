@@ -11,12 +11,12 @@
       <li><a href="/about">About</a></li>
       <% if (currentUser) { %>
         <!-- PetPal's link is nothing yet -->
-        <li><a href="/">PetPals</a></li>
+        <li><a href="/pets">My Pets</a></li>
       <% } %>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <% if (currentUser) { %>
-        <li><a href="#"><%= currentUser.local.email %></a></li>
+        <li><a href="/<%= currentUser._id %>/edit"><%= currentUser.local.email %></a></li>
         <li><a href="/logout">Logout</a></li>
       <% } else { %>
         <li><a href="/login">Login</a></li>

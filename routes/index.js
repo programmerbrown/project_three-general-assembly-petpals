@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var session = require('express-session');
+var User = require('../models/user')
 var Post = require('../models/post');
 
 function makeError(res, message, status) {
@@ -21,7 +22,7 @@ function authenticate(req, res, next) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'PetPals Home' });
+  res.render('static pages/index', { title: 'PetPals Home' });
 });
 
 // INDEX (ALL POSTS)
@@ -35,12 +36,19 @@ router.get('/posts', function(req, res, next) {
 
 // about page
 router.get('/about', function(req, res, next) {
-  res.render('about', {title: 'PetPals About'});
+  res.render('static pages/about', {title: 'PetPals About'});
 });
 
 // GET /signup
 router.get('/signup', function(req, res, next) {
-  res.render('signup.ejs', { message: req.flash() });
+  var user = new User ({
+    name: '',
+    age: '',
+    location: '',
+    gender: '',
+    picture: ''
+  });
+  res.render('users/signup', { user: user, message: req.flash() });
 });
 
 // POST /signup
@@ -49,29 +57,52 @@ router.post('/signup', function(req, res, next) {
     successRedirect : '/',
     failureRedirect : '/signup',
     failureFlash : true
-  });
+  })
   return signUpStrategy(req, res, next);
 });
 
+
 // GET /login
 router.get('/login', function(req, res, next) {
-  res.render('login.ejs', { message: req.flash() });
+  res.render('users/login', { message: req.flash() });
 });
 
 // POST /login
 router.post('/login', function(req, res, next) {
   var loginProperty = passport.authenticate('local-login', {
-    successRedirect : '/',
-    failureRedirect : '/login',
+    successRedirect : '/pets',
+    failureRedirect : 'users/login',
     failureFlash : true
   });
   return loginProperty(req, res, next);
 });
 
 // EDIT USER
-router.get('/edit', function(req, res, next) {
+router.get('/:id/edit', authenticate, function(req, res, next) {
+  var user = currentUser
+  if (!user) return next(makeError(res, 'Document not found', 404));
+  res.render('users/edit', { user: user, message: req.flash() });
+});
 
-})
+// UPDATE USER
+router.put('/:id', authenticate, function(req, res, next) {
+  var user = currentUser
+  if (!currentUser) return next(makeError(res, 'Document not found', 404));
+  else {
+    user.name = req.body.name;
+    user.age = req.body.age;
+    user.location = req.body.location;
+    user.gender = req.body.gender;
+    user.picture = req.body.picture;
+    user.local.email = req.body.email;
+    user.save()
+    .then(function(saved) {
+      res.redirect('/');
+    }, function(err) {
+      return next(err)
+    });
+  }
+});
 
 // GET /logout
 router.get('/logout', function(req, res, next) {
