@@ -99,15 +99,10 @@ postsRouter.put('/:id', authenticate, function(req, res, next) {
 
 // DESTROY POST
 postsRouter.delete('/:id', authenticate, function(req,res,next) {
-  // grab post
-  var post = pets.id(req.params.id);
-  if (!post) return next(makeError(res, 'Document not found', 404));
-  pets.id.post.splice(index, 1);
-  post.save()
-  .then(function(saved){
-   res.redirect('/pets');
- }, function(err) {
-  return next(err);
+
+  Post.remove({ _id: req.params.id })
+  .then(function() {
+    res.redirect('/pets');
   });
 });
 
