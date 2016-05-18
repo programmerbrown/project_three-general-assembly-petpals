@@ -43,7 +43,7 @@ postsRouter.get('/:id', function(req, res, next) {
 });
 
 // CREATE POST
-postsRouter.post('pets/:id/posts/', function(req, res, next) {
+postsRouter.post('/', function(req, res, next) {
   var post = new Post ({
     title: req.body.title,
     text: req.body.text,

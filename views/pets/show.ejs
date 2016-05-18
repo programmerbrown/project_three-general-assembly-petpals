@@ -10,12 +10,12 @@ This is our pet SHOW page. It will show you the details of the specified pet as 
 </dl>
 
 
-<% pet.posts.forEach(function(post) { %>
+<% posts.forEach(function(post) { %>
 
 <dl>
-    <dt> Title </dt> <dd><%= pet.post.title %> </dd>
-    <dt> Post </dt> <dd><%= pet.post.text %> </dd>
-    <dt> Pic </dt> <dd><%= pet.post.postPicture %> </dd>
+    <dt> Title </dt> <dd><%= post.title %> </dd>
+    <dt> Post </dt> <dd><%= post.text %> </dd>
+    <dt> Pic </dt> <dd><%= post.postPicture %> </dd>
  </dl>
 
  <% }) %>
