@@ -81,6 +81,6 @@ app.use(function(err, req, res, next) {
   });
 });
 
-mongoose.connect('mongodb://localhost/petpals');
+mongoose.connect(process.env.MONGOLAB_URI || 'mongodb://localhost/petpals');
 
 module.exports = app;
