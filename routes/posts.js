@@ -30,8 +30,8 @@ postsRouter.get('/new', function(req, res, next) {
     title: '',
     text: '',
     postPicture: ''
-});
-  res.render('posts/new', { post: post, id:req.params.id } );
+  });
+  res.render('posts/new', { post: post, id: req.params.id } );
 });
 
 // SHOW POST
@@ -40,7 +40,6 @@ postsRouter.get('/:id', function(req, res, next) {
   if (!pet) return next(makeError(res, 'Document not found', 404));
   res.render('posts/show', { post: post, message: req.flash() });
 });
-
 
 // CREATE POST
 postsRouter.post('/', function(req, res, next) {
@@ -54,7 +53,7 @@ postsRouter.post('/', function(req, res, next) {
   post.save()
   .then(function() {
   console.log("Saved, and we're redirecting")
-  res.redirect('/posts');
+  res.redirect('/pets');
 }, function(err) {
     return next(err);
   });

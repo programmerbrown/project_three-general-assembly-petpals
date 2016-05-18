@@ -12,12 +12,9 @@ function makeError(res, message, status) {
 }
 
 function authenticate(req, res, next) {
-
-  if(!req.isAuthenticated()) {
+  if (!req.isAuthenticated()) {
     res.redirect('/');
-  }
-  else {
-
+  } else {
     next();
   }
 }
@@ -28,11 +25,11 @@ router.get('/', function(req, res, next) {
 });
 
 // INDEX (ALL POSTS)
-<<<<<<< HEAD
-router.get('/posts',  function(req, res, next) {
-  Post.find({})
+router.get('/posts', function(req, res, next) {
+  return Post.find({}).populate('pet')
   .then(function(posts) {
-  res.render('posts/index', { posts: posts} );
+    console.log(posts);
+    res.render('posts/index', { posts: posts} );
   });
 });
 

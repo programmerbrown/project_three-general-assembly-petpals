@@ -39,20 +39,15 @@ petsRouter.get('/new', function(req, res, next) {
 });
 
 // SHOW PET
-
-petsRouter.get('/:id', authenticate, function(req, res, next) {
-  var pet = currentUser.pets.id(req.params.id);
-
+petsRouter.get('/:id', function(req, res, next) {
+  var pet = Pet.findById(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
   res.render('pets/show', { pet: pet, message: req.flash() });
 });
 
-
-
-// CREATE
-petsRouter.post('/', authenticate, function(req, res, next) {
-  console.log("made it to the pets create route");
- var pet = {
+// CREATE PET
+petsRouter.post('/', function(req, res, next) {
+  var pet = {
     name: req.body.name,
     type: req.body.type,
     breed: req.body.breed,
@@ -61,13 +56,12 @@ petsRouter.post('/', authenticate, function(req, res, next) {
     bio: req.body.bio,
     profilePicture: req.body.profilePicture
   };
-
-
-  currentUser.pets.push(pet);
+  console.log("pushing pet to current user")
+  currentUser.pets.push(pet)
   currentUser.save()
-    .then(function(saved) {
-      res.redirect('/pets');
-    }, function(err) {
+  .then(function() {
+    res.redirect('/pets');
+  }, function(err) {
       return next(err);
     });
 });
@@ -92,28 +86,27 @@ petsRouter.put('/:id', function(req, res, next) {
     pet.bio = req.body.bio;
     pet.profilePicture = req.body.profilePicture;
     currentUser.save()
-      .then(function(saved) {
-        res.redirect('/pets');
-      }, function(err) {
-        return next(err)
-      });
+    .then(function(saved) {
+      res.redirect('/pets');
+    }, function(err) {
+      return next(err)
+    });
   }
 });
-// DESTROY
-petsRouter.delete('/:id', authenticate, function(req, res, next) {
+
+// DESTROY PET
+petsRouter.delete('/:id', function(req,res,next) {
   var pet = currentUser.pets.id(req.params.id);
   if (!pet) return next(makeError(res, 'Document not found', 404));
   var index = currentUser.pets.indexOf(pet);
   currentUser.pets.splice(index, 1);
   currentUser.save()
-    .then(function(saved) {
-      res.redirect('/pets');
-    }, function(err) {
-      return next(err);
-    });
+  .then(function(saved){
+   res.redirect('/pets');
+ }, function(err) {
+  return next(err);
+  });
 });
 
 
 module.exports = petsRouter;
-
-
