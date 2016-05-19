@@ -52,7 +52,7 @@ petsRouter.get('/:id', function(req, res, next) {
   res.render('pets/show', { posts: posts, pet: pet,  message: req.flash() });
  })
 });
-pet
+
 // CREATE PET
 petsRouter.post('/', function(req, res, next) {
   var pet = new Pet ({
