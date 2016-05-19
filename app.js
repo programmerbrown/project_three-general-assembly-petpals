@@ -18,6 +18,9 @@ var petsRouter = require('./routes/pets');
 var postsRouter = require('./routes/posts');
 var app = express();
 
+
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/petpals');
+
 var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
 var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
 var S3_BUCKET = process.env.S3_BUCKET;
@@ -49,18 +52,6 @@ app.use(function (req, res, next) {
   global.currentUser = req.user;
   next();
 });
-
-app.use('/', routes);
-app.use('/pets', petsRouter);
-
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
-});
-
 /*
  * Respond to GET requests to /sign_s3.
  * Upon request, return JSON containing the temporarily-signed S3 request and the
@@ -91,6 +82,18 @@ app.get('/sign_s3', function(req, res){
         }
     });
 });
+app.use('/', routes);
+app.use('/pets', petsRouter);
+
+
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  var err = new Error('Not Found');
+  err.status = 404;
+  next(err);
+});
+
+
 // error handlers
 
 // development error handler
@@ -115,6 +118,5 @@ app.use(function(err, req, res, next) {
   });
 });
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/petpals');
 
 module.exports = app;
