@@ -3,11 +3,12 @@ This is our NEW pets page. It will have the form for creating a new pet.
 
 <form action="/pets" method="post">
 <% include _form %>
+<input type="file" id="file_input">
 <div class="button">
 <button type="submit"> Create my Pet </button>
 </div>
 </form>
-<input type="file" id="file_input">
+
 <script type="text/javascript">
 /*
     Function to carry out the actual PUT request to S3 using the signed request from the app.
