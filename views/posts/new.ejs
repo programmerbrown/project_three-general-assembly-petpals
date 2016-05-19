@@ -10,9 +10,11 @@
       <label>Text</label>
       <textarea class="form-control" rows="4" cols="20" type="text" placeholder="Enter the text for your post here." name="text"></textarea>
     </div>
-    <div class="form-group">
-      <label>URL of Picture</label>
-      <input class="form-control" type="text" placeholder="URL" name="postPicture">
+    <div>
+       <label>Picture Upload</label>
+      <input type="file" id="file_input">
+      <input type="hidden" id="postPicture" name="postPicture" value="<%= post.postPicture %>" />
+
     </div>
     <div class="form-group">
       <button class="form-control" type="submit">Create a Post</button>
@@ -20,3 +22,65 @@
   </form>
 
 </div>
+<script type="text/javascript">
+/*
+    Function to carry out the actual PUT request to S3 using the signed request from the app.
+*/
+function upload_file(file, signed_request, url){
+    var xhr = new XMLHttpRequest();
+    xhr.open("PUT", signed_request);
+    xhr.setRequestHeader('x-amz-acl', 'public-read');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            console.log(url);
+            // document.getElementById("preview").src = url;
+            document.getElementById("postPicture").value = url;
+        }
+    };
+    xhr.onerror = function() {
+        alert("Could not upload file.");
+    };
+    xhr.send(file);
+}
+/*
+    Function to get the temporary signed request from the app.
+    If request successful, continue to upload the file using this signed
+    request.
+*/
+function get_signed_request(file){
+    var xbr = new XMLHttpRequest();
+    xbr.open("GET", "/sign_s3?file_name="+file.name+"&file_type="+file.type);
+    xbr.onreadystatechange = function(){
+        if(xbr.readyState === 4){
+            if(xbr.status === 200){
+                var response = JSON.parse(xbr.responseText);
+                upload_file(file, response.signed_request, response.url);
+            }
+            else{
+                alert("Could not get signed URL.");
+            }
+        }
+    };
+    xbr.send();
+}
+/*
+   Function called when file input updated. If there is a file selected, then
+   start upload procedure by asking for a signed request from the app.
+*/
+function init_upload(){
+    console.log("here");
+    var files = document.getElementById("file_input").files;
+    var file = files[0];
+    if(file == null){
+        alert("No file selected.");
+        return;
+    }
+    get_signed_request(file);
+}
+/*
+   Bind listeners when the page loads.
+*/
+(function() {
+    document.getElementById("file_input").onchange = init_upload;
+})();
+</script>
