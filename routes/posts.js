@@ -1,6 +1,7 @@
 var express = require('express');
 var Post = require("../models/post");
-var Pet = require('../models/pet')
+var Pet = require('../models/pet');
+var Comment = require('../models/comment');
 var petsRouter = require('./pets');
 var mongoose = require('mongoose');
 
@@ -87,15 +88,14 @@ postsRouter.put('/:id', authenticate, function(req, res, next) {
     }
   })
   .then(function(saved) {
-        res.redirect('/pets');
-      }, function(err) {
-        return next(err)
+      res.redirect('/pets');
+    }, function(err) {
+      return next(err)
   });
 });
 
 // DESTROY POST
 postsRouter.delete('/:id', authenticate, function(req,res,next) {
-
   Post.remove({ _id: req.params.id })
   .then(function() {
     res.redirect('/pets');
@@ -103,4 +103,4 @@ postsRouter.delete('/:id', authenticate, function(req,res,next) {
 });
 
 
-module.export = postsRouter;
+module.exports = postsRouter;

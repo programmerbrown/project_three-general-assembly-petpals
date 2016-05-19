@@ -5,9 +5,13 @@ var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
 
 var CommentSchema = new Schema ({
-  pet: {type: Scehma.ObjectId, ref:"Pet"},
-  post: {type:Schema.ObjectId, ref:"Post"},
-  commentText: String,
+  pet: {type:Schema.ObjectId, ref:"Pet"},
+
+  // we don't need a reference to post because
+  // we are embedded inside a post
+  // post: {type:Schema.ObjectId, ref:"Post"},
+
+  commentText: String
   },
   {timestamps: true}
 );
