@@ -16,7 +16,7 @@
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <% if (currentUser) { %>
-        <li><a href="/<%= currentUser._id %>/edit"><%= currentUser.local.email %></a></li>
+        <li><a href="/<%= currentUser._id %>/edit">Welcome, <%= currentUser.name %> (Edit)</a></li>
         <li><a href="/logout">Logout</a></li>
       <% } else { %>
         <li><a href="/login">Login</a></li>
