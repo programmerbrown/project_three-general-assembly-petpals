@@ -1,6 +1,6 @@
 
 This is the posts index page
-<% posts.forEach(function(post) { %>
+<% posts.forEach(function(post, index) { %>
 
   <dl>
     <dt>Name<a href="/pets/<%= post.pet.id %>">
@@ -17,7 +17,7 @@ This is the posts index page
   </dl>
 
     Comments:
-    <ul id="comments">
+    <ul id="comments-<%=index%>">
     </ul>
 
 
