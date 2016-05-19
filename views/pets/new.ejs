@@ -18,6 +18,7 @@ function upload_file(file, signed_request, url){
     xhr.setRequestHeader('x-amz-acl', 'public-read');
     xhr.onload = function() {
         if (xhr.status === 200) {
+            console.log(url);
             document.getElementById("preview").src = url;
             document.getElementById("profilePicture").value = url;
         }

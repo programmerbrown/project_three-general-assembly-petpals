@@ -12,7 +12,7 @@
 				<a href="/pets/<%= pet.id %>"><%= pet.name %></a>
 			</h4>
 		</div>
-		
+
 		</div>
 	</div>
 	<div class="media-body">
@@ -21,28 +21,31 @@
 		</h4>
 		<ul class="list-group">
 			<li class="list-group-item">
-				Type: <%= pet.type %> 
+				Type: <%= pet.type %>
 			</li>
 			<li class="list-group-item">
-				Breed: <%= pet.breed %> 
+				Breed: <%= pet.breed %>
 			</li>
 			<li class="list-group-item">
-				Gender: <%= pet.gender %> 
+				Gender: <%= pet.gender %>
 			</li>
 			<li class="list-group-item">
-				Age: <%= pet.age %> 
+				Age: <%= pet.age %>
 			</li>
 			<li class="list-group-item"> Summary:  <%= pet.bio %> </li>
 		</ul>
 	</div>
-	
-</div>	
+
+</div>
 <div class="btn-group">
 	<a href="/pets/<%= pet._id %>/edit">
 		<button class="btn btn-info">Edit</button></a>
 	<a href="/pets/<%= pet._id %>/posts/new">
 		<button class="btn btn-info"> Make a New Post </button></a>
-	<a href="/pets/new"> 
-		<button class="btn btn-primary">Create a New Pet </button></a>
+
 </div>
 <% }) %>
+<div>
+<a href="/pets/new">
+		<button class="btn btn-primary">Create a New Pet </button></a>
+		</div>
