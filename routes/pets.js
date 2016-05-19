@@ -44,14 +44,14 @@ petsRouter.get('/:id', function(req, res, next) {
   var pet = currentUser.pets.id(req.params.id);
   console.log(pet);
   if (!pet) return next(makeError(res, 'Document not found', 404));
-  return Post.find({}).populate('pet')
+  return Post.find({pet: pet._id }).populate('pet')
   .then(function(posts) {
     // console.log(posts);
     // console.log(posts[0].pet._id);
   res.render('pets/show', { posts: posts, pet: pet,  message: req.flash() });
  })
 });
-
+pet
 // CREATE PET
 petsRouter.post('/', function(req, res, next) {
   var pet = new Pet ({
