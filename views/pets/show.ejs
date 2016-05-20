@@ -66,9 +66,12 @@
 		<%= post.text %>
     </div>
 </div>
-<form method="POST" action="/pets/<%= post._id %>/posts/<%= post._id %>/?_method=DELETE">
+<form method="POST" action="/pets/<%= pet._id %>/posts/<%= post._id %>/?_method=DELETE">
     <button class="btn btn-default" type="submit" >Delete Post</button>
+
   </form>
+
+
 
  <% }) %>
 
