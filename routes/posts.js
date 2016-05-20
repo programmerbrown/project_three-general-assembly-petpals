@@ -1,6 +1,7 @@
 var express = require('express');
 var Post = require("../models/post");
-var Pet = require('../models/pet')
+var Pet = require('../models/pet');
+var Comment = require('../models/comment');
 var petsRouter = require('./pets');
 var mongoose = require('mongoose');
 
@@ -68,10 +69,6 @@ postsRouter.get('/:id/edit', authenticate, function(req, res, next) {
     console.log(postReturned);
     res.render('posts/edit', {post: postReturned, id: req.params.id, message: req.flash() });
   });
-  // .then(function())
-  // // var post = pets.id.post.id(req.params.id);
-  // if (!post) return next(makeError(res, 'Document not found', 404));
-  // res.render('/posts/edit', {post: post, message: req.flash() });
 });
 
 // UPDATE POST
@@ -91,9 +88,9 @@ postsRouter.put('/:id', authenticate, function(req, res, next) {
     }
   })
   .then(function(saved) {
-        res.redirect('/pets');
-      }, function(err) {
-        return next(err)
+      res.redirect('/pets');
+    }, function(err) {
+      return next(err)
   });
 });
 
@@ -106,4 +103,4 @@ postsRouter.delete('/:id', authenticate, function(req,res,next) {
 });
 
 
-module.export = postsRouter;
+module.exports = postsRouter;

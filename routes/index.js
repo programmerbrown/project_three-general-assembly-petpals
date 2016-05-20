@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var passport = require('passport');
 var session = require('express-session');
-var User = require('../models/user')
+var User = require('../models/user');
 var Post = require('../models/post');
 
 function makeError(res, message, status) {
@@ -27,9 +27,10 @@ router.get('/', function(req, res, next) {
 
 // INDEX (ALL POSTS)
 router.get('/posts', function(req, res, next) {
-  return Post.find({}).populate('pet')
+  return Post.find({})
+  .populate('pet').populate('comments.pet')
   .then(function(posts) {
-    console.log(posts);
+    console.log('posts:', posts);
     res.render('posts/index', { posts: posts } );
   });
 });
@@ -60,7 +61,6 @@ router.post('/signup', function(req, res, next) {
   })
   return signUpStrategy(req, res, next);
 });
-
 
 // GET /login
 router.get('/login', function(req, res, next) {

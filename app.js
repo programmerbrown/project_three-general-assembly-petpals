@@ -16,6 +16,7 @@ var aws = require('aws-sdk');
 var routes = require('./routes/index');
 var petsRouter = require('./routes/pets');
 var postsRouter = require('./routes/posts');
+var commentsRouter = require('./routes/comments');
 var app = express();
 
 
@@ -52,6 +53,7 @@ app.use(function (req, res, next) {
   global.currentUser = req.user;
   next();
 });
+
 /*
  * Respond to GET requests to /sign_s3.
  * Upon request, return JSON containing the temporarily-signed S3 request and the
@@ -82,8 +84,10 @@ app.get('/sign_s3', function(req, res){
         }
     });
 });
+
 app.use('/', routes);
 app.use('/pets', petsRouter);
+app.use('/', commentsRouter);
 
 
 // catch 404 and forward to error handler

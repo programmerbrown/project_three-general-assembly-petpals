@@ -16,8 +16,6 @@ var User = new mongoose.Schema({
   pets : [Pet.schema]
   }, { timestamp: true });
 
-
-
 User.methods.encrypt = function(password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(8));
 };

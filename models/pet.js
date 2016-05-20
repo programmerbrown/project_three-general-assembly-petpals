@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var Post = require('./post');
 
 var Schema = mongoose.Schema;
 var ObjectId = Schema.ObjectId;
@@ -11,8 +10,7 @@ var PetSchema = new Schema({
   gender:         String,
   age:            Number,
   bio:            String,
-  profilePicture: String,
-
+  profilePicture: String
 }, {timestamps: true}
 );
 
