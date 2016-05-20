@@ -8,7 +8,12 @@
 </form>
 <form method="POST" action="/pets/<%= pet._id %>/?_method=DELETE">
     <button class="btn btn-danger" type="submit">Delete</button>
+<div>
+       <label>Picture Upload</label>
+      <input type="file" id="file_input">
+      <input type="hidden" id="postPicture" name="postPicture" value="<%= post.postPicture %>" />
 
+    </div>
 </form>
 
 </div>

@@ -8,13 +8,19 @@
       <label>Text</label>
       <textarea class="form-control" type="text" rows="4" cols="20" name="text"><%= post.text %></textarea>
     </div>
+<div>
+       <label>Picture Upload</label>
+      <input type="file" id="file_input">
+      <input type="hidden" id="postPicture" name="postPicture" value="<%= post.postPicture %>" />
 
+    </div>
     <div class="form-group">
       <button class="btn btn-default" type="submit">Update Post</button>
     </div>
   </form>
   <form method="POST" action="/pets/<%= id %>/posts/<%= post._id %>/?_method=DELETE">
     <button class="btn btn-default" type="submit" >Delete Post</button>
+
   </form>
 </div>
 
