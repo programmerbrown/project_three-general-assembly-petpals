@@ -26,18 +26,12 @@ function authenticate(req, res, next) {
 
 // CREATE COMMENT
 commentsRouter.post('/posts/:id/comment', function(req, res, next) {
-  var tempObj = {};
-  var commentPetId = req.body.pet;
-  var commentText = req.body.commentText;
-    var comment = new Comment ({
-    pet: commentPetId,
-    commentText: commentText
-  });
-  comment.save()
-  .then(function() {
   return Post.findById(req.params.id)
-  })
   .then(function(post) {
+    var comment = new Comment ({
+      pet: req.body.pet,
+      commentText: req.body.commentText
+    });
     post.comments.push(comment);
     return post.save();
   })

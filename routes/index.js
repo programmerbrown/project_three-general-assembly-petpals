@@ -27,9 +27,10 @@ router.get('/', function(req, res, next) {
 
 // INDEX (ALL POSTS)
 router.get('/posts', function(req, res, next) {
-  return Post.find({}).populate('pet')
+  return Post.find({})
+  .populate('pet').populate('comments.pet')
   .then(function(posts) {
-    console.log(res.body)
+    console.log('posts:', posts);
     res.render('posts/index', { posts: posts } );
   });
 });
