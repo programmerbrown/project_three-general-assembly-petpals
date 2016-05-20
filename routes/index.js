@@ -29,10 +29,10 @@ router.get('/', function(req, res, next) {
 router.get('/posts', function(req, res, next) {
   return Post.find({}).populate('pet')
   .then(function(posts) {
+    console.log(res.body)
     res.render('posts/index', { posts: posts } );
   });
 });
-
 
 // about page
 router.get('/about', function(req, res, next) {

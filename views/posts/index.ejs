@@ -15,12 +15,15 @@ This is the posts index page
 
     Comments:
     <ul class="comments-section">
-      <li class="comments">
-        <%comments.forEach(function(comment) { %>
-          <%= comment.pet.name %>
-          <%= comment.pet.breed %>
-          <%= comment.pet.type %>
-          <%= comment.commentText %>
+      <li class="comments-list">
+        <% if (post.comments) { %>
+          <%post.comments.forEach(function(comment) { %>
+            <%= comment.pet %>
+            <%= comment.pet.breed %>
+            <%= comment.pet.type %>
+            <%= comment.commentText %>
+          <% }); %>
+        <% } %>
       </li>
     </ul>
 

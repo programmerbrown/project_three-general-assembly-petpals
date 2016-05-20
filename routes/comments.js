@@ -24,35 +24,33 @@ function authenticate(req, res, next) {
   }
 }
 
-// POST COMMENT
+// CREATE COMMENT
 commentsRouter.post('/posts/:id/comment', function(req, res, next) {
-  console.log("hit comment route");
-  console.log('req.body:', req.body);
   var commentPetId = req.body.pet;
-  console.log('commentPetId:', commentPetId);
+
+  Pet.find({_id: commentPetId})
+    .then(function(pet){
+      console.log(pet);
+      res.body.pet = pet;
+    });
+
+  console.log(commentPetId);
   var commentText = req.body.commentText;
-  console.log('commentText:', commentText);
-  console.log('finding post with id:', req.params.id);
+  var comment = {
+    pet: commentPetId,
+    commentText: commentText
+  };
   Post.findById(req.params.id)
   .then(function(post) {
-    console.log('post:', post);
-    var comment = {
-      pet: commentPetId,
-      commentText: commentText
-    };
-    console.log('about to push comment:', comment);
     post.comments.push(comment);
-    console.log('about to save post:', post);
     return post.save();
   })
   .then(function(savedPost) {
-    console.log('savedPost:', savedPost);
     res.redirect('/posts');
   }, function(err) {
     return next(err);
   });
 });
-
 
 
 module.exports = commentsRouter;
