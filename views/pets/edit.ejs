@@ -1,5 +1,10 @@
 <form action="/pets/<%= pet._id %>?_method=PUT" method="post">
 <% include _form %>
+<div class="form-group">
+        <label for="profilePicture"> Profile Picture </label>
+        <input type="hidden" id="profilePicture" name="profilePicture" value="<%= pet.profilePicture %>" />
+    </div>
+
 <input type="file" id="file_input">
 <div class="btn-group">
 <div class="button">
