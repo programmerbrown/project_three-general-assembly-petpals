@@ -10,11 +10,9 @@ var User = new mongoose.Schema({
   password: String,
   },
   name: String,
-  picture: String,
   location: String,
   age: Number,
   gender: String,
-
   pets : [Pet.schema]
   }, { timestamp: true });
 

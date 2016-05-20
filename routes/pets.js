@@ -1,6 +1,7 @@
 var express = require('express');
 var petsRouter = express.Router();
 var Pet = require("../models/pet");
+var Post = require('../models/post');
 
 
 function makeError(res, message, status) {
@@ -40,9 +41,14 @@ petsRouter.get('/new', function(req, res, next) {
 
 // SHOW PET
 petsRouter.get('/:id', function(req, res, next) {
-  var pet = currentUser.pets.id(req.params.id);
+  var pet = currentUser.pets.id(req.params.id)
   if (!pet) return next(makeError(res, 'Document not found', 404));
-  res.render('pets/show', { pet: pet, message: req.flash() });
+  return Post.find({}).populate('pet')
+  .then(function(posts) {
+    console.log(posts);
+    console.log(posts[0].pet._id);
+  res.render('pets/show', { posts: posts, pet: pet,  message: req.flash() });
+ })
 });
 
 // CREATE PET
@@ -56,9 +62,7 @@ petsRouter.post('/', function(req, res, next) {
     bio: req.body.bio,
     profilePicture: req.body.profilePicture
   });
-  console.log('saving pet');
-  pet.save();
-  console.log(pet);
+  pet.save()
   console.log("pushing pet to current user")
   currentUser.pets.push(pet);
   console.log('saving pet to user');
@@ -104,8 +108,19 @@ petsRouter.delete('/:id', function(req,res,next) {
   if (!pet) return next(makeError(res, 'Document not found', 404));
   var index = currentUser.pets.indexOf(pet);
   currentUser.pets.splice(index, 1);
+  // console.log(pet);
   currentUser.save()
-  .then(function(saved){
+  .then(function(saved) {
+    console.log("Hello World!");
+    console.log(req.params.id);
+    // return Post.find({ pet: req.params.id });
+    return Post.remove({ pet: req.params.id });
+  })
+  .then(function() {
+    return Pet.findByIdAndRemove(req.params.id);
+  })
+  .then(function(){
+    // console.log(post);
    res.redirect('/pets');
  }, function(err) {
   return next(err);

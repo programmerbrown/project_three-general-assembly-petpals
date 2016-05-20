@@ -7,6 +7,8 @@ var PostSchema = new Schema({
   title:          {type: String, required: true},
   text:           {type: String, required: true},
   postPicture:    String,
+  purrs:          Array, 
+  grrs:           Array,
   pet: {type: Schema.ObjectId, ref: 'Pet'}
 }, {timestamps: true});
 

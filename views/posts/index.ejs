@@ -1,6 +1,5 @@
-This is the posts index page
-<% posts.forEach(function(post) { %>
 
+<% posts.forEach(function(post) { %>
   <dl>
     <dt>Name<a href="/pets/<%= post.pet.id %>">
     <dd><%= post.pet.name %></dd>
@@ -14,5 +13,39 @@ This is the posts index page
     <dt> Post </dt> <dd><%= post.text %> </dd>
     <dt> Pic </dt> <dd><%= post.postPicture %> </dd>
   </dl>
+<div class="media" style="border: 1px solid #ddd; padding: 8px">
+  <div class="media-left">
+  <div class="card" style="min-width:175px">
+      <img class="card-img-top img-thumbnail img-responsive center-block" src="<%= post.pet.profilePicture %>">
+    <div class="card-block">
+    <ul class="list-group">
+      <li class="list-group-item">
+        <h4 class="card-title">
+        <%= post.pet.name %>
+      </h4></li>
+      <li class="list-group-item">
+        Type: <%= post.pet.type %>
+      </li>
+      <li class="list-group-item">
+        Age: <%= post.pet.age %>
+      </li>
+<!--       <li class="list-group-item">
+      <button type="button" class="btn btn-success"> Purr? </button>
+      </li>
+      <li class="list-group-item">
+      <button type="button" class="btn btn-danger"> Grrr? </button>
+     </li>  -->
+    </ul>
+  </div>
+  </div>
+  </div>
+  <div class="media-body" style="max-height:650px">
+    <h4 class="media-heading"> <%= post.title %> </h4>
+    <img class="media-object img-responsive" style="max-width:70%; max-height:70%" src="<%= post.postPicture %>">
+    <div style="padding:5px">
+    <%= post.text %>
+  </div>
+  </div>
+</div>
 
 <% }) %>

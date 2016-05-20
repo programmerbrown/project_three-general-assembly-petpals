@@ -4,12 +4,12 @@ This is our EDIT page. It will include the Pet form for updating.
 
 <form action="/pets/<%= pet._id %>?_method=PUT" method="post">
 <% include _form %>
+<div class="btn-group">
 <div class="button">
-<button type="submit">Save my Changes</button>
-
+<button class="btn btn-success" type="submit">Save my Changes</button>
 </div>
-
 </form>
 <form method="POST" action="/pets/<%= pet._id %>/?_method=DELETE">
-    <button type="submit">Delete</button>
-  </form>
+    <button class="btn btn-danger" type="submit">Delete</button>
+</form>
+</div>

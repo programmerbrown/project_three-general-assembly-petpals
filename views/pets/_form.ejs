@@ -2,35 +2,35 @@
 
 
 
-	<div>
+	<div class="form-group">
 		<label for="name"> Name </label>
 
-		<input type="text" id="name" name="name" value="<%= pet.name %>" />
+		<input  class="form-control" type="text" id="name" name="name" value="<%= pet.name %>" />
 
 	</div>
-	<div>
+	<div class="form-group">
 		<label for="age"> Age </label>
-		<input type="number" id="age" name="age" value="<%= pet.age %>" />
+		<input class="form-control" type="number" id="age" name="age" value="<%= pet.age %>" />
 	</div>
-	<div>
+	<div class="form-group">
 		<label for="type"> Type </label>
-		<input type="text" id="type" name="type" value="<%= pet.type %>" />
+		<input class="form-control" type="text" id="type" name="type" value="<%= pet.type %>" />
 	</div>
-	<div>
+	<div class="form-group">
 		<label for="breed"> Breed </label>
-		<input type="text" id="breed" name="breed" value="<%= pet.breed %>" />
+		<input class="form-control" type="text" id="breed" name="breed" value="<%= pet.breed %>" />
 	</div>
-	<div>
+	<div class="form-group">
 		<label for="gender"> Gender </label>
-		<input type="text" id="gender" name="gender" value="<%= pet.gender %>" />
+		<input class="form-control" type="text" id="gender" name="gender" value="<%= pet.gender %>" />
 	</div>
-	<div>
-		<label for="bio"> Bio </label>
-		<input type="text" id="bio" name="bio" value="<%= pet.bio %>" />
+	<div class="form-group">
+		<label for="bio"> Bio </label> 
+		<textarea class="form-control" rows="6" cols="20" type="text" name="bio" id="bio" placeholder="Tell us a little about yourself!" name="text"></textarea>
 	</div>
-	<div>
+	<div class="form-group">
 		<label for="profilePicture"> Profile Picture </label>
-		<input type="text" id="profilePicture" name="profilePicture" value="<%= pet.profilePicture %>" />
+		<input class="form-control" type="text" id="profilePicture" name="profilePicture" value="<%= pet.profilePicture %>" />
 	</div>
 
 
