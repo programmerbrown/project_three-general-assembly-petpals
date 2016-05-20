@@ -1,5 +1,6 @@
 <% posts.forEach(function(post) { %>
-<div class="media" style="border: 1px solid #ddd; padding: 8px; max-width:1000px; margin: 0 auto;">
+<h1 style="text-align: center">Post:</h1>
+<div class="media" style="border: 3px solid #ddd; padding: 8px; max-width:1000px; margin: 0 auto; background-color: #99ddff">
   <div class="media-left">
     <div class="card" style="min-width:175px">
       <img class="card-img-top img-thumbnail img-responsive center-block" src="<%= post.pet.profilePicture %>">
@@ -8,9 +9,13 @@
           <li class="list-group-item">
             <h4 class="card-title">
             <%= post.pet.name %>
-          </h4></li>
+            </h4>
+          </li>
           <li class="list-group-item">
-            Type: <%= post.pet.type %>
+            <%= post.pet.breed %>
+          </li>
+          <li class="list-group-item">
+            <%= post.pet.type %>
           </li>
           <li class="list-group-item">
             Age: <%= post.pet.age %>
@@ -39,19 +44,26 @@
   </div>
 </div>
 
-<h4>Comments:</h4>
+<h3 style="text-align: center">Comments:</h3>
 <% if (post.comments) { %>
 <% post.comments.forEach(function(comment) { %>
-<div class="media" style="border: 1px solid #ddd; padding: 8px">
+<div class="media" style="border: 3px solid #ddd; padding: 8px; max-width:1000px; margin: 0 auto; background-color: #99ddff">
   <div class="media-left">
     <div class="card" style="min-width:175px">
-    <img class="card-img-top img-thumbnail img-responsive center-block" src="<%= comment.pet.profilePicture %>">
+      <img class="card-img-top img-thumbnail img-responsive center-block" src="<%= comment.pet.profilePicture %>">
       <div class="card-block">
         <ul class="list-group">
           <li class="list-group-item">
-            <h6>
-              <%= comment.pet.name %>
-            </h6>
+            <%= comment.pet.name %>
+          </li>
+          <li class="list-group-item">
+            <%= comment.pet.breed %>
+          </li>
+          <li class="list-group-item">
+            <%= comment.pet.type %>
+          </li>
+          <li class="list-group-item">
+            Age: <%= comment.pet.age %>
           </li>
         </ul>
       </div>
@@ -66,7 +78,7 @@
 <% }); %>
 <% } %>
 
-<div class="media" style="border: 1px solid #ddd; padding: 8px">
+<div class="media" style="border: 3px solid #ddd; padding: 8px; max-width:1000px; margin: 0 auto; background-color: #FFB6C1">
   <div class="form-group" style="padding: 10px;">
   <form method="post" action="/posts/<%= post._id %>/comment">
     <input class="form-control" type="text" name="commentText" id="comment-text" placeholder="Make a comment!" value="" style="padding: 10px; margin: 10px">
