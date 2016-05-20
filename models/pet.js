@@ -10,7 +10,7 @@ var PetSchema = new Schema({
   gender:         String,
   age:            Number,
   bio:            String,
-  profilePicture: String,
+  profilePicture: String
 }, {timestamps: true}
 );
 

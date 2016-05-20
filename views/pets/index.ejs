@@ -1,20 +1,48 @@
-This is our pets INDEX page. It will list all of our pets.
+<h2> My Pets </h2>
 
 
 <% pets.forEach(function(pet) { %>
 
-<dl>
-	<dt><a href="/pets/<%= pet.id %>"> Name </a></dt><dd><%= pet.name %></dd>
-	<dt> Gender </dt><dd><%= pet.gender %></dd>
-	<dt> Type </dt><dd><%= pet.type %></dd>
-	<dt> Breed </dt><dd><%= pet.breed %></dd>
-	<dt> Age </dt><dd><%= pet.age %></dd>
-	<dt> Bio </dt><dd><%= pet.bio %></dd>
-</dl>
-
-	<li><a href="/pets/<%= pet._id %>/edit"><button>Edit</button></a></li>
-
-	<!-- <li><form method="POST" action="/pets/<%= pet._id %>?_method=DELETE">
-  	<button type="submit">Delete</button>
-	</form></li> -->
+<div class="media">
+	<div class="media-left">
+		<div class="card" style="min-width:200px">
+			<img class="media-object card-img-top img-responsive center-block" src="<%= pet.profilePicture %>" style="max-width:70%,max-height:70%">
+		<div class="card-block">
+			<h4 class="card-title center-block">
+				<a href="/pets/<%= pet.id %>"><%= pet.name %></a>
+			</h4>
+		</div>
+		
+		</div>
+	</div>
+	<div class="media-body">
+		<h4 class="media-head">
+			About <%= pet.name %>
+		</h4>
+		<ul class="list-group">
+			<li class="list-group-item">
+				Type: <%= pet.type %> 
+			</li>
+			<li class="list-group-item">
+				Breed: <%= pet.breed %> 
+			</li>
+			<li class="list-group-item">
+				Gender: <%= pet.gender %> 
+			</li>
+			<li class="list-group-item">
+				Age: <%= pet.age %> 
+			</li>
+			<li class="list-group-item"> Summary:  <%= pet.bio %> </li>
+		</ul>
+	</div>
+	
+</div>	
+<div class="btn-group">
+	<a href="/pets/<%= pet._id %>/edit">
+		<button class="btn btn-info">Edit</button></a>
+	<a href="/pets/<%= pet._id %>/posts/new">
+		<button class="btn btn-info"> Make a New Post </button></a>
+	<a href="/pets/new"> 
+		<button class="btn btn-primary">Create a New Pet </button></a>
+</div>
 <% }) %>

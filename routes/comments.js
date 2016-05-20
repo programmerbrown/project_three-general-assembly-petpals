@@ -26,21 +26,17 @@ function authenticate(req, res, next) {
 
 // CREATE COMMENT
 commentsRouter.post('/posts/:id/comment', function(req, res, next) {
+  var tempObj = {};
   var commentPetId = req.body.pet;
-
-  Pet.find({_id: commentPetId})
-    .then(function(pet){
-      console.log(pet);
-      res.body.pet = pet;
-    });
-
-  console.log(commentPetId);
   var commentText = req.body.commentText;
-  var comment = {
+    var comment = new Comment ({
     pet: commentPetId,
     commentText: commentText
-  };
-  Post.findById(req.params.id)
+  });
+  comment.save()
+  .then(function() {
+  return Post.findById(req.params.id)
+  })
   .then(function(post) {
     post.comments.push(comment);
     return post.save();
