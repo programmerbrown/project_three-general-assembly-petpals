@@ -55,7 +55,7 @@ router.get('/signup', function(req, res, next) {
 // POST /signup
 router.post('/signup', function(req, res, next) {
   var signUpStrategy = passport.authenticate('local-signup', {
-    successRedirect : '/',
+    successRedirect : '/posts',
     failureRedirect : '/signup',
     failureFlash : true
   })
