@@ -1,11 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Signika:400,700);
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 14px;
 }
 
 a {
   color: #00B7FF;
 }
+
 
 .btn {
   margin: 5px;
@@ -38,4 +41,13 @@ a {
 }
 .custom-file-input:active::before {
   background: -webkit-linear-gradient(top, #e3e3e3, #f9f9f9);
+
+* {
+  font-family: 'Signika';
+
+}
+
+nav {
+  font-size: 18px;
+
 }
