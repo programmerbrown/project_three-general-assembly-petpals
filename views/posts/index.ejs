@@ -47,7 +47,7 @@
 <h3 style="text-align: center">Comments:</h3>
 <% if (post.comments) { %>
 <% post.comments.forEach(function(comment) { %>
-<div class="media" style="border: 3px solid #ddd; padding: 8px; max-width:1000px; margin: 0 auto; background-color: #99ddff">
+<div class="media" style="border: 3px solid #ddd; padding: 8px; max-width:1000px; margin: 0 auto; background-color: #FFB6C1">
   <div class="media-left">
     <div class="card" style="min-width:175px">
       <img class="card-img-top img-thumbnail img-responsive center-block" src="<%= comment.pet.profilePicture %>">
@@ -78,7 +78,7 @@
 <% }); %>
 <% } %>
 
-<div class="media" style="border: 3px solid #ddd; padding: 8px; max-width:1000px; margin: 0 auto; background-color: #FFB6C1">
+<div class="media" style="border: 3px solid #ddd; padding: 8px; max-width:1000px; margin: 0 auto; background-color: #98FB98">
   <div class="form-group" style="padding: 10px;">
   <form method="post" action="/posts/<%= post._id %>/comment">
     <input class="form-control" type="text" name="commentText" id="comment-text" placeholder="Make a comment!" value="" style="padding: 10px; margin: 10px">
