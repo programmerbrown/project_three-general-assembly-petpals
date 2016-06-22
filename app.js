@@ -22,8 +22,8 @@ var app = express();
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/petpals');
 
-var AWS_ACCESS_KEY = process.env.AWS_ACCESS_KEY;
-var AWS_SECRET_KEY = process.env.AWS_SECRET_KEY;
+var AWS_ACCESS_KEY = process.env.S3_KEY;
+var AWS_SECRET_KEY = process.env.S3_SECRET;
 var S3_BUCKET = process.env.S3_BUCKET;
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
