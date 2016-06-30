@@ -2,7 +2,7 @@
 
 ##How to Use PetPals
 
-- Heroku link [HERE](https://whispering-ravine-94817.herokuapp.com/)
+- Heroku link [HERE](https://petpals-nb.herokuapp.com/)
 - Source code on Github [HERE](https://github.com/nickthehustler/wdi6-generalassembly-project6-petpals)
 
 ##Project Notes
@@ -25,13 +25,13 @@ We started out by sketching out very detailed descriptions of our models and vie
 
 Next we split up with some of us focusing on routing and others focusing on views, allowing us to each work independently compromising the ability for our code to work together.
 
-Finally, upon finishing our most basic MVP, we each assigned ourselves some smaller issues in the program to address, as well as taking on a feature that we personally really wanted to attempt to implement. 
+Finally, upon finishing our most basic MVP, we each assigned ourselves some smaller issues in the program to address, as well as taking on a feature that we personally really wanted to attempt to implement.
 
 Our Trello Board can be found [HERE](https://trello.com/b/7YKUhSoL/petpals-project-3)
 
 ##Future Developments
 
-We have a lot of developments we'd like to implement in the future. 
+We have a lot of developments we'd like to implement in the future.
 
 Add a 'Purr and Grrr' feature (likes&dislikes) that utilizes AJAX
 
